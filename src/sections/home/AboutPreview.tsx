@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Target, Hexagon, Users, ShieldCheck } from 'lucide-react';
+import { ArrowRight, FileText, Layers, UserCheck, Handshake, Target, Hexagon, Users, ShieldCheck } from 'lucide-react';
 import { Button } from '../../components/common/Button';
-import aboutGraphicImg from '/@fs/C:/Users/Mohithsai Malla/.gemini/antigravity/brain/cff265d6-6700-4d41-a668-ad0601c90b86/.user_uploaded/media_1787909943670.jpg';
+import { Logo } from '../../components/common/Logo';
 
 export const AboutPreview: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export const AboutPreview: React.FC = () => {
       }}
     >
       <div className="container" style={{ maxWidth: '1420px', position: 'relative', zIndex: 2 }}>
-        {/* Main Two-Column Composition: ~42% Left Content / ~58% Right Preferred Image Asset */}
+        {/* Main Two-Column Composition: ~42% Left Content / ~58% Right Enterprise Architecture Diagram */}
         <div
           style={{
             display: 'grid',
@@ -197,42 +198,218 @@ export const AboutPreview: React.FC = () => {
             </div>
           </div>
 
-          {/* RIGHT COLUMN (~58% Width / 7 Columns): Preferred Clean White Graphic Image (media_1787909943670.jpg) */}
+          {/* RIGHT COLUMN (~58% Width / 7 Columns): Clean Architecture Infographic Diagram (100% Vector & Component-based) */}
           <div style={{ gridColumn: 'span 12' }} className="about-redesign-right">
             <div
               style={{
                 position: 'relative',
                 width: '100%',
+                minHeight: '480px',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '24px',
+                border: '1px solid #E6E0EB',
+                padding: '1.5rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 700ms cubic-bezier(0.16, 1, 0.3, 1) 300ms',
+                boxShadow: '0 16px 40px rgba(134, 78, 168, 0.1), 0 4px 16px rgba(0, 0, 0, 0.02)',
               }}
             >
+              {/* SVG Vector Connector Lines & Technical Concentric Rings */}
+              <svg
+                viewBox="0 0 620 440"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+              >
+                {/* Background Isometric Technical Grid Lines */}
+                <g opacity="0.12">
+                  <path d="M 0 110 L 620 420 M 0 220 L 620 530 M 0 0 L 620 310" stroke="#864EA8" strokeWidth="1" strokeDasharray="3 3" />
+                  <path d="M 620 110 L 0 420 M 620 220 L 0 530 M 620 0 L 0 310" stroke="#864EA8" strokeWidth="1" strokeDasharray="3 3" />
+                </g>
+
+                {/* Concentric Architectural Rings around Central Hub */}
+                <circle cx="310" cy="220" r="82" stroke="#864EA8" strokeWidth="1.5" opacity="0.35" />
+                <circle cx="310" cy="220" r="98" stroke="#864EA8" strokeWidth="1" strokeDasharray="4 4" opacity="0.4" />
+
+                {/* Right-Angle Thin Connector Vector Lines to 4 Process Cards */}
+                {/* Connector to Card 01 (Top Left) */}
+                <path d="M 228 180 L 160 180 L 160 135" stroke="#864EA8" strokeWidth="1.5" fill="none" />
+                <polygon points="160,135 156,141 164,141" fill="#864EA8" />
+                <rect x="180" y="177" width="6" height="6" fill="#864EA8" />
+
+                {/* Connector to Card 02 (Top Right) */}
+                <path d="M 392 180 L 460 180 L 460 135" stroke="#864EA8" strokeWidth="1.5" fill="none" />
+                <polygon points="460,135 456,141 464,141" fill="#864EA8" />
+                <rect x="424" y="177" width="6" height="6" fill="#864EA8" />
+
+                {/* Connector to Card 03 (Bottom Right) */}
+                <path d="M 392 260 L 460 260 L 460 305" stroke="#864EA8" strokeWidth="1.5" fill="none" />
+                <polygon points="460,305 456,299 464,299" fill="#864EA8" />
+                <rect x="424" y="257" width="6" height="6" fill="#864EA8" />
+
+                {/* Connector to Card 04 (Bottom Left) */}
+                <path d="M 228 260 L 160 260 L 160 305" stroke="#864EA8" strokeWidth="1.5" fill="none" />
+                <polygon points="160,305 156,299 464,299" fill="#864EA8" />
+                <rect x="180" y="257" width="6" height="6" fill="#864EA8" />
+              </svg>
+
+              {/* CENTRAL HUB: Multi-Ring Circle with Official Nova Sitara Logo */}
               <div
                 style={{
                   position: 'relative',
-                  width: '100%',
-                  maxWidth: '580px',
-                  borderRadius: '24px',
-                  overflow: 'hidden',
-                  boxShadow: '0 16px 40px rgba(134, 78, 168, 0.12), 0 4px 16px rgba(0, 0, 0, 0.03)',
-                  border: '1px solid #E6E0EB',
+                  zIndex: 3,
+                  width: '155px',
+                  height: '155px',
+                  borderRadius: '50%',
                   backgroundColor: '#FFFFFF',
+                  border: '2px solid #864EA8',
+                  boxShadow: '0 0 32px rgba(134, 78, 168, 0.2), 0 4px 16px rgba(0, 0, 0, 0.04)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  padding: '0.85rem',
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'scale(1)' : 'scale(0.85)',
+                  transition: 'all 600ms cubic-bezier(0.16, 1, 0.3, 1) 250ms',
                 }}
               >
-                <img
-                  src={aboutGraphicImg}
-                  alt="Nova Sitara Enterprise Architecture & Sourcing Flow"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    display: 'block',
-                    objectFit: 'cover',
-                  }}
-                />
+                <div>
+                  <Logo variant="default" showWordmark={true} />
+                </div>
+              </div>
+
+              {/* CARD 01: Top Left */}
+              <div
+                onMouseEnter={() => setHoveredCard(1)}
+                onMouseLeave={() => setHoveredCard(null)}
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  left: '12px',
+                  width: '215px',
+                  padding: '1.2rem',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '18px',
+                  border: '1px solid #E6E0EB',
+                  boxShadow: hoveredCard === 1 ? '0 12px 28px rgba(134, 78, 168, 0.18)' : '0 6px 18px rgba(134, 78, 168, 0.06)',
+                  zIndex: 4,
+                  transform: hoveredCard === 1 ? 'translateY(-3px)' : 'translateY(0)',
+                  transition: 'all 250ms ease',
+                  opacity: isVisible ? 1 : 0,
+                  transitionDelay: '350ms',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span style={{ fontSize: '1.35rem', fontWeight: 800, color: '#864EA8' }}>01</span>
+                  <FileText size={20} color="#864EA8" />
+                </div>
+                <h4 style={{ fontSize: '0.825rem', fontWeight: 800, color: '#080808', letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
+                  PROJECT REQUIREMENT
+                </h4>
+                <p style={{ fontSize: '0.8rem', color: '#4F4F5A', lineHeight: 1.4, margin: 0 }}>
+                  Understanding business needs & skill gaps.
+                </p>
+              </div>
+
+              {/* CARD 02: Top Right */}
+              <div
+                onMouseEnter={() => setHoveredCard(2)}
+                onMouseLeave={() => setHoveredCard(null)}
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  right: '12px',
+                  width: '215px',
+                  padding: '1.2rem',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '18px',
+                  border: '1px solid #E6E0EB',
+                  boxShadow: hoveredCard === 2 ? '0 12px 28px rgba(134, 78, 168, 0.18)' : '0 6px 18px rgba(134, 78, 168, 0.06)',
+                  zIndex: 4,
+                  transform: hoveredCard === 2 ? 'translateY(-3px)' : 'translateY(0)',
+                  transition: 'all 250ms ease',
+                  opacity: isVisible ? 1 : 0,
+                  transitionDelay: '450ms',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span style={{ fontSize: '1.35rem', fontWeight: 800, color: '#864EA8' }}>02</span>
+                  <Layers size={20} color="#864EA8" />
+                </div>
+                <h4 style={{ fontSize: '0.825rem', fontWeight: 800, color: '#080808', letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
+                  SPECIALIZED EXPERTISE
+                </h4>
+                <p style={{ fontSize: '0.8rem', color: '#4F4F5A', lineHeight: 1.4, margin: 0 }}>
+                  Access to SAP & Vistex domain experts.
+                </p>
+              </div>
+
+              {/* CARD 03: Bottom Right */}
+              <div
+                onMouseEnter={() => setHoveredCard(3)}
+                onMouseLeave={() => setHoveredCard(null)}
+                style={{
+                  position: 'absolute',
+                  bottom: '12px',
+                  right: '12px',
+                  width: '215px',
+                  padding: '1.2rem',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '18px',
+                  border: '1px solid #E6E0EB',
+                  boxShadow: hoveredCard === 3 ? '0 12px 28px rgba(134, 78, 168, 0.18)' : '0 6px 18px rgba(134, 78, 168, 0.06)',
+                  zIndex: 4,
+                  transform: hoveredCard === 3 ? 'translateY(-3px)' : 'translateY(0)',
+                  transition: 'all 250ms ease',
+                  opacity: isVisible ? 1 : 0,
+                  transitionDelay: '550ms',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span style={{ fontSize: '1.35rem', fontWeight: 800, color: '#864EA8' }}>03</span>
+                  <UserCheck size={20} color="#864EA8" />
+                </div>
+                <h4 style={{ fontSize: '0.825rem', fontWeight: 800, color: '#080808', letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
+                  QUALIFIED PROFESSIONAL
+                </h4>
+                <p style={{ fontSize: '0.8rem', color: '#4F4F5A', lineHeight: 1.4, margin: 0 }}>
+                  Connecting with the right consultant for the role.
+                </p>
+              </div>
+
+              {/* CARD 04: Bottom Left */}
+              <div
+                onMouseEnter={() => setHoveredCard(4)}
+                onMouseLeave={() => setHoveredCard(null)}
+                style={{
+                  position: 'absolute',
+                  bottom: '12px',
+                  left: '12px',
+                  width: '215px',
+                  padding: '1.2rem',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '18px',
+                  border: '1px solid #E6E0EB',
+                  boxShadow: hoveredCard === 4 ? '0 12px 28px rgba(134, 78, 168, 0.18)' : '0 6px 18px rgba(134, 78, 168, 0.06)',
+                  zIndex: 4,
+                  transform: hoveredCard === 4 ? 'translateY(-3px)' : 'translateY(0)',
+                  transition: 'all 250ms ease',
+                  opacity: isVisible ? 1 : 0,
+                  transitionDelay: '650ms',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span style={{ fontSize: '1.35rem', fontWeight: 800, color: '#864EA8' }}>04</span>
+                  <Handshake size={20} color="#864EA8" />
+                </div>
+                <h4 style={{ fontSize: '0.825rem', fontWeight: 800, color: '#080808', letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
+                  PROJECT SUPPORT
+                </h4>
+                <p style={{ fontSize: '0.8rem', color: '#4F4F5A', lineHeight: 1.4, margin: 0 }}>
+                  Delivery & maintenance for successful outcomes.
+                </p>
               </div>
             </div>
           </div>

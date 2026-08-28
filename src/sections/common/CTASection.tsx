@@ -3,7 +3,19 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../../components/common/Button';
 
-export const CTASection: React.FC = () => {
+interface CTASectionProps {
+  title?: string;
+  subtitle?: string;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
+export const CTASection: React.FC<CTASectionProps> = ({
+  title,
+  subtitle,
+  buttonText = 'Talk to Our Experts',
+  buttonLink = '/contact',
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -76,7 +88,7 @@ export const CTASection: React.FC = () => {
           {/* Large White Heading */}
           <h2
             style={{
-              fontSize: 'clamp(2.5rem, 5.2vw, 4.25rem)',
+              fontSize: 'clamp(2.2rem, 5vw, 4rem)',
               fontWeight: 800,
               color: '#FFFFFF',
               lineHeight: 1.12,
@@ -86,21 +98,25 @@ export const CTASection: React.FC = () => {
           >
             <span className="text-mask-wrapper">
               <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '150ms' }}>
-                Have an SAP project
+                {title ? title : 'Have an SAP project'}
               </span>
             </span>
-            <br />
-            <span className="text-mask-wrapper">
-              <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '300ms' }}>
-                that needs the right expertise?
-              </span>
-            </span>
+            {!title && (
+              <>
+                <br />
+                <span className="text-mask-wrapper">
+                  <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '300ms' }}>
+                    that needs the right expertise?
+                  </span>
+                </span>
+              </>
+            )}
           </h2>
 
           {/* Supporting Text */}
           <p
             style={{
-              fontSize: 'clamp(1.1rem, 2vw, 1.25rem)',
+              fontSize: 'clamp(1.05rem, 1.8vw, 1.2rem)',
               lineHeight: 1.6,
               color: 'rgba(255, 255, 255, 0.85)',
               maxWidth: '640px',
@@ -110,7 +126,7 @@ export const CTASection: React.FC = () => {
               transition: 'opacity 600ms ease 450ms, transform 600ms ease 450ms',
             }}
           >
-            Tell us what your project needs. We'll help connect you with the right expertise.
+            {subtitle ? subtitle : "Tell us what your project needs. We'll help connect you with the right expertise."}
           </p>
 
           {/* CTA Button */}
@@ -124,7 +140,7 @@ export const CTASection: React.FC = () => {
               transition: 'opacity 600ms ease 600ms, transform 600ms ease 600ms',
             }}
           >
-            <Link to="/contact">
+            <Link to={buttonLink}>
               <Button
                 variant="primary"
                 size="lg"
@@ -136,7 +152,7 @@ export const CTASection: React.FC = () => {
                   boxShadow: '0 8px 24px rgba(134, 78, 168, 0.4)',
                 }}
               >
-                Talk to Our Experts
+                {buttonText}
               </Button>
             </Link>
           </div>

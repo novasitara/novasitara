@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
           {/* Left Column: Logo & Description */}
           <div style={{ gridColumn: 'span 12' }} className="footer-brand-col">
             <div style={{ marginBottom: '1.25rem' }}>
-              <Logo theme="dark" size="lg" />
+              <Logo variant="dark" height={42} />
             </div>
             <p style={{ fontSize: '0.95rem', lineHeight: 1.65, color: '#A0A0B0', maxWidth: '360px', marginBottom: '1.5rem' }}>
               Nova Sitara Private Limited is a specialized SAP and Vistex consulting and technology staffing company connecting organizations with experienced consultants.

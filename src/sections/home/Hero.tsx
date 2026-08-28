@@ -33,8 +33,8 @@ export const Hero: React.FC = () => {
       style={{
         position: 'relative',
         backgroundColor: '#FAFAFA',
-        paddingTop: 'clamp(4rem, 8vw, 6.5rem)',
-        paddingBottom: 'clamp(4rem, 8vw, 6.5rem)',
+        paddingTop: 'clamp(3.5rem, 7vw, 6.5rem)',
+        paddingBottom: 'clamp(3.5rem, 7vw, 6.5rem)',
         overflow: 'hidden',
       }}
     >
@@ -43,7 +43,7 @@ export const Hero: React.FC = () => {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '2.5rem',
+            gap: '2rem',
             alignItems: 'center',
           }}
         >
@@ -55,9 +55,10 @@ export const Hero: React.FC = () => {
                 marginBottom: '1.25rem',
                 color: '#000000',
                 lineHeight: 1.12,
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontSize: 'clamp(2.1rem, 5vw, 4rem)',
                 fontWeight: 800,
                 letterSpacing: '-0.035em',
+                wordBreak: 'break-word',
               }}
             >
               <span className="text-mask-wrapper">
@@ -81,11 +82,11 @@ export const Hero: React.FC = () => {
             {/* Paragraph Text */}
             <p
               style={{
-                fontSize: 'clamp(1.05rem, 1.8vw, 1.2rem)',
+                fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
                 lineHeight: 1.65,
                 color: 'var(--color-text-body)',
                 maxWidth: '600px',
-                marginBottom: '2.25rem',
+                marginBottom: '2rem',
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
                 transition: 'opacity 600ms ease 650ms, transform 600ms ease 650ms',
@@ -96,23 +97,24 @@ export const Hero: React.FC = () => {
 
             {/* Action Buttons */}
             <div
+              className="hero-cta-buttons"
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 gap: '1rem',
-                marginBottom: '2.25rem',
+                marginBottom: '2rem',
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
                 transition: 'opacity 600ms ease 800ms, transform 600ms ease 800ms',
               }}
             >
-              <Link to="/services">
-                <Button variant="primary" size="lg" rightIcon={<ArrowRight size={18} />}>
+              <Link to="/services" className="hero-btn-link">
+                <Button variant="primary" size="lg" rightIcon={<ArrowRight size={18} />} style={{ width: '100%' }}>
                   Explore Our Services
                 </Button>
               </Link>
-              <Link to="/contact">
-                <Button variant="outline" size="lg">
+              <Link to="/contact" className="hero-btn-link">
+                <Button variant="outline" size="lg" style={{ width: '100%' }}>
                   Talk to Our Experts
                 </Button>
               </Link>
@@ -131,6 +133,7 @@ export const Hero: React.FC = () => {
                 border: '1px solid rgba(210, 210, 225, 0.8)',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 600ms ease 1000ms',
+                maxWidth: '100%',
               }}
             >
               <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text-muted)', marginRight: '0.35rem' }}>
@@ -173,6 +176,18 @@ export const Hero: React.FC = () => {
           }
           .hero-visual-col {
             grid-column: span 5 !important;
+          }
+          .hero-btn-link {
+            width: auto !important;
+          }
+        }
+        @media (max-width: 576px) {
+          .hero-cta-buttons {
+            flex-direction: column !important;
+            width: 100% !important;
+          }
+          .hero-btn-link {
+            width: 100% !important;
           }
         }
       `}</style>

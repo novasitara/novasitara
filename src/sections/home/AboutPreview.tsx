@@ -29,8 +29,8 @@ export const AboutPreview: React.FC = () => {
       ref={sectionRef}
       style={{
         backgroundColor: '#FFFFFF',
-        paddingTop: 'clamp(3.5rem, 5vw, 4.5rem)',
-        paddingBottom: 'clamp(3.5rem, 5vw, 4.5rem)',
+        paddingTop: 'clamp(3rem, 5vw, 4.5rem)',
+        paddingBottom: 'clamp(3rem, 5vw, 4.5rem)',
         borderBottom: '1px solid #E6E0EB',
         position: 'relative',
         overflow: 'hidden',
@@ -42,7 +42,7 @@ export const AboutPreview: React.FC = () => {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '2.5rem',
+            gap: '2rem',
             alignItems: 'start',
             marginBottom: '2.5rem',
           }}
@@ -80,13 +80,14 @@ export const AboutPreview: React.FC = () => {
             {/* Main Headline (Exact 3 Lines: Line 1 = 'The Right Expertise', Line 2 = 'for Complex SAP', Line 3 = 'Environments.') */}
             <h2
               style={{
-                fontSize: 'clamp(2.4rem, 3.6vw, 3.35rem)',
-                lineHeight: 1.06,
-                letterSpacing: '-0.04em',
+                fontSize: 'clamp(1.8rem, 5.5vw, 3.35rem)',
+                lineHeight: 1.1,
+                letterSpacing: '-0.035em',
                 fontWeight: 800,
                 marginBottom: '1.25rem',
                 color: '#080808',
                 textAlign: 'left',
+                maxWidth: '100%',
               }}
             >
               <span
@@ -105,7 +106,7 @@ export const AboutPreview: React.FC = () => {
               <span
                 style={{
                   display: 'block',
-                  whiteSpace: 'nowrap',
+                  whiteSpace: 'normal',
                   margin: 0,
                   padding: 0,
                   opacity: isVisible ? 1 : 0,
@@ -174,9 +175,10 @@ export const AboutPreview: React.FC = () => {
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(12px)',
                 transition: 'opacity 500ms ease 650ms, transform 500ms ease 650ms',
+                width: '100%',
               }}
             >
-              <Link to="/about">
+              <Link to="/about" style={{ display: 'inline-block', width: '100%', maxWidth: '280px' }}>
                 <Button
                   variant="outline"
                   size="lg"
@@ -188,6 +190,7 @@ export const AboutPreview: React.FC = () => {
                     borderRadius: '8px',
                     padding: '0.7rem 1.6rem',
                     fontWeight: 700,
+                    width: '100%',
                   }}
                 >
                   Learn More About Us
@@ -229,7 +232,7 @@ export const AboutPreview: React.FC = () => {
                     width: '100%',
                     height: 'auto',
                     display: 'block',
-                    objectFit: 'cover',
+                    objectFit: 'contain',
                   }}
                 />
               </div>
@@ -243,7 +246,7 @@ export const AboutPreview: React.FC = () => {
             backgroundColor: '#FFFFFF',
             border: '1px solid #E6E0EB',
             borderRadius: '16px',
-            padding: '1.35rem 1.75rem',
+            padding: '1.35rem 1.5rem',
             boxShadow: '0 4px 14px rgba(0, 0, 0, 0.02)',
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
@@ -345,6 +348,7 @@ export const AboutPreview: React.FC = () => {
         @media (max-width: 576px) {
           .target-value-col, .target-value-col-last {
             grid-column: span 12 !important;
+            padding-right: 0 !important;
           }
         }
       `}</style>

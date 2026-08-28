@@ -49,8 +49,8 @@ export const WhyNovaSitara: React.FC = () => {
       ref={sectionRef}
       style={{
         backgroundColor: '#FAFAFA',
-        paddingTop: 'clamp(5rem, 8vw, 7rem)',
-        paddingBottom: 'clamp(5rem, 8vw, 7rem)',
+        paddingTop: 'clamp(3.5rem, 6vw, 6rem)',
+        paddingBottom: 'clamp(3.5rem, 6vw, 6rem)',
         borderBottom: '1px solid var(--color-border)',
         position: 'relative',
         overflow: 'hidden',
@@ -58,11 +58,11 @@ export const WhyNovaSitara: React.FC = () => {
     >
       <div className="container">
         {/* Section Header */}
-        <div style={{ maxWidth: '720px', marginBottom: '4rem' }}>
+        <div style={{ maxWidth: '720px', marginBottom: '3.5rem' }}>
           <div className="eyebrow" style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 400ms ease' }}>
             HOW WE WORK
           </div>
-          <h2 style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', color: '#000000', lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', color: '#000000', lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>
             <span className="text-mask-wrapper">
               <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`}>
                 From Requirement to the
@@ -84,6 +84,7 @@ export const WhyNovaSitara: React.FC = () => {
         <div style={{ position: 'relative', marginTop: '2.5rem' }}>
           {/* Base Vector Line Track */}
           <div
+            className="timeline-track-base"
             style={{
               position: 'absolute',
               top: '24px',
@@ -97,6 +98,7 @@ export const WhyNovaSitara: React.FC = () => {
 
           {/* Progressive Purple Line Fill */}
           <div
+            className="timeline-track-fill"
             style={{
               position: 'absolute',
               top: '24px',
@@ -131,11 +133,11 @@ export const WhyNovaSitara: React.FC = () => {
                 className="timeline-stage-col"
               >
                 {/* Number & Node Accent */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
                   <div
                     style={{
-                      width: '48px',
-                      height: '48px',
+                      width: '46px',
+                      height: '46px',
                       borderRadius: '50%',
                       backgroundColor: isVisible ? '#864EA8' : '#FFFFFF',
                       border: '2px solid #864EA8',
@@ -147,6 +149,7 @@ export const WhyNovaSitara: React.FC = () => {
                       fontWeight: 800,
                       boxShadow: '0 4px 12px rgba(134, 78, 168, 0.18)',
                       transition: 'all 300ms ease',
+                      flexShrink: 0,
                     }}
                   >
                     {stage.num}
@@ -154,12 +157,12 @@ export const WhyNovaSitara: React.FC = () => {
                 </div>
 
                 {/* Stage Title */}
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#000000', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#000000', marginBottom: '0.4rem', letterSpacing: '-0.01em' }}>
                   {stage.title}
                 </h3>
 
                 {/* Stage Description */}
-                <p style={{ fontSize: '0.925rem', color: 'var(--color-text-muted)', lineHeight: 1.6, margin: 0 }}>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', lineHeight: 1.55, margin: 0 }}>
                   {stage.desc}
                 </p>
               </div>
@@ -170,9 +173,15 @@ export const WhyNovaSitara: React.FC = () => {
 
       <style>{`
         @media (max-width: 768px) {
+          .timeline-track-base, .timeline-track-fill {
+            display: none !important;
+          }
           .timeline-stage-col {
             grid-column: span 12 !important;
             margin-bottom: 2rem;
+            position: relative;
+            padding-left: 1.25rem;
+            border-left: 2px solid #864EA8;
           }
         }
       `}</style>

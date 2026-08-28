@@ -31,18 +31,18 @@ export const ServicesOverview: React.FC = () => {
       ref={sectionRef}
       style={{
         backgroundColor: '#FAFAFA',
-        paddingTop: 'clamp(5rem, 8vw, 7rem)',
-        paddingBottom: 'clamp(5rem, 8vw, 7rem)',
+        paddingTop: 'clamp(3.5rem, 6vw, 6rem)',
+        paddingBottom: 'clamp(3.5rem, 6vw, 6rem)',
         borderBottom: '1px solid var(--color-border)',
       }}
     >
       <div className="container">
         {/* Section Header */}
-        <div style={{ maxWidth: '720px', marginBottom: '4rem' }}>
+        <div style={{ maxWidth: '720px', marginBottom: '3rem' }}>
           <div className="eyebrow" style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 400ms ease' }}>
             SERVICE DIRECTORY
           </div>
-          <h2 style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', color: '#000000', lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', color: '#000000', lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>
             <span className="text-mask-wrapper">
               <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`}>
                 How We Help.
@@ -55,7 +55,7 @@ export const ServicesOverview: React.FC = () => {
         </div>
 
         {/* Editorial Vertical Service Directory Index */}
-        <div style={{ width: '100%', marginBottom: '3.5rem', borderTop: '1px solid var(--color-border)' }}>
+        <div style={{ width: '100%', marginBottom: '3rem', borderTop: '1px solid var(--color-border)' }}>
           {servicesData.map((service, idx) => {
             const isHovered = hoveredId === service.id;
             const numberFormatted = String(idx + 1).padStart(2, '0');
@@ -65,20 +65,21 @@ export const ServicesOverview: React.FC = () => {
                 key={service.id}
                 onMouseEnter={() => setHoveredId(service.id)}
                 onMouseLeave={() => setHoveredId(null)}
+                className="service-directory-row"
                 style={{
                   position: 'relative',
-                  padding: '1.85rem 0',
+                  padding: '1.75rem 0',
                   borderBottom: '1px solid var(--color-border)',
                   display: 'grid',
                   gridTemplateColumns: 'repeat(12, 1fr)',
-                  gap: '1.5rem',
+                  gap: '1.25rem',
                   alignItems: 'center',
                   cursor: 'pointer',
                   transition: 'background-color 200ms ease',
                   backgroundColor: isHovered ? '#FFFFFF' : 'transparent',
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
-                  transitionDelay: `${idx * 60}ms`,
+                  transitionDelay: `${idx * 50}ms`,
                 }}
               >
                 {/* Active Left Purple Line Indicator */}
@@ -97,10 +98,10 @@ export const ServicesOverview: React.FC = () => {
                 />
 
                 {/* Number */}
-                <div style={{ gridColumn: 'span 1', paddingLeft: '1rem' }}>
+                <div className="service-row-num" style={{ gridColumn: 'span 1', paddingLeft: '0.75rem' }}>
                   <span
                     style={{
-                      fontSize: '1.05rem',
+                      fontSize: '1rem',
                       fontFamily: 'monospace',
                       fontWeight: 800,
                       color: isHovered ? '#864EA8' : 'var(--color-text-muted)',
@@ -112,10 +113,10 @@ export const ServicesOverview: React.FC = () => {
                 </div>
 
                 {/* Service Name */}
-                <div style={{ gridColumn: 'span 5' }}>
+                <div className="service-row-title" style={{ gridColumn: 'span 5' }}>
                   <h3
                     style={{
-                      fontSize: 'clamp(1.2rem, 2.2vw, 1.55rem)',
+                      fontSize: 'clamp(1.15rem, 2vw, 1.45rem)',
                       color: isHovered ? '#864EA8' : '#000000',
                       transition: 'transform 200ms ease, color 150ms ease',
                       transform: isHovered ? 'translateX(6px)' : 'translateX(0)',
@@ -128,12 +129,12 @@ export const ServicesOverview: React.FC = () => {
                 </div>
 
                 {/* Short Description */}
-                <div style={{ gridColumn: 'span 5' }}>
+                <div className="service-row-desc" style={{ gridColumn: 'span 5' }}>
                   <p
                     style={{
-                      fontSize: '0.925rem',
+                      fontSize: '0.9rem',
                       color: 'var(--color-text-muted)',
-                      lineHeight: 1.6,
+                      lineHeight: 1.55,
                       margin: 0,
                       opacity: isHovered ? 1 : 0.85,
                     }}
@@ -143,7 +144,7 @@ export const ServicesOverview: React.FC = () => {
                 </div>
 
                 {/* Arrow Action Link */}
-                <div style={{ gridColumn: 'span 1', textAlign: 'right', paddingRight: '1rem' }}>
+                <div className="service-row-arrow" style={{ gridColumn: 'span 1', textAlign: 'right', paddingRight: '0.75rem' }}>
                   <Link to={`/services#${service.id}`}>
                     <div
                       style={{
@@ -154,7 +155,7 @@ export const ServicesOverview: React.FC = () => {
                         height: '38px',
                         borderRadius: '8px',
                         backgroundColor: isHovered ? '#864EA8' : 'transparent',
-                        color: isHovered ? '#FFFFFF' : '#000000',
+                        color: isHovered ? '#864EA8' : '#000000',
                         transition: 'all 200ms ease',
                       }}
                     >
@@ -168,8 +169,8 @@ export const ServicesOverview: React.FC = () => {
         </div>
 
         {/* View All Services Link */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', margin: 0 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.25rem' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.925rem', margin: 0 }}>
             Dedicated functional and technical capabilities for your SAP enterprise environment.
           </p>
           <Link to="/services">
@@ -179,6 +180,26 @@ export const ServicesOverview: React.FC = () => {
           </Link>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .service-directory-row {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 1.25rem 0.75rem !important;
+            gap: 0.5rem !important;
+          }
+          .service-row-num {
+            padding-left: 0 !important;
+          }
+          .service-row-arrow {
+            align-self: flex-end !important;
+            margin-top: -1.75rem !important;
+            padding-right: 0 !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

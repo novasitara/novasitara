@@ -46,11 +46,11 @@ export const AboutPage: React.FC = () => {
           <div className="container">
             <div style={{ maxWidth: '800px' }}>
               <div className="eyebrow">About Nova Sitara</div>
-              <h1 style={{ marginBottom: '1.25rem', color: 'var(--color-text-heading)' }}>
-                Specialized SAP & Vistex Consulting <br />
+              <h1 style={{ marginBottom: '1.25rem', color: 'var(--color-text-heading)', fontSize: 'clamp(1.85rem, 5vw, 3.5rem)', wordBreak: 'break-word' }}>
+                Specialized SAP & Vistex Consulting <br className="desktop-br-only" />
                 <span style={{ color: 'var(--color-primary)' }}>& Technology Staffing.</span>
               </h1>
-              <p style={{ fontSize: '1.15rem', lineHeight: 1.6, color: 'var(--color-text-body)' }}>
+              <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', lineHeight: 1.6, color: 'var(--color-text-body)' }}>
                 Nova Sitara Private Limited is a specialized SAP and Vistex consulting and technology staffing company connecting organizations with experienced professionals for implementations, enhancements, migrations, and support.
               </p>
             </div>
@@ -64,12 +64,12 @@ export const AboutPage: React.FC = () => {
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(12, 1fr)',
-                gap: '3rem',
+                gap: '2.5rem',
                 alignItems: 'center',
               }}
             >
               <div style={{ gridColumn: 'span 12' }} className="about-hero-left">
-                <h2 style={{ marginBottom: '1.25rem' }}>Our Business Positioning</h2>
+                <h2 style={{ marginBottom: '1.25rem', fontSize: 'clamp(1.6rem, 4vw, 2.5rem)' }}>Our Business Positioning</h2>
                 <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--color-text-body)', marginBottom: '1.25rem' }}>
                   Enterprise SAP implementations and specialized solution enhancements require precise domain expertise. Nova Sitara has a particular focus on the niche Vistex market, helping consulting firms, implementation partners, and end clients access qualified professionals for specific project roles.
                 </p>
@@ -84,9 +84,9 @@ export const AboutPage: React.FC = () => {
                     "Technical engineering and custom ABAP development.",
                     "Flexible engagement models for implementation support and staffing."
                   ].map((item, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                      <CheckCircle2 size={18} color="var(--color-primary)" />
-                      <span style={{ fontWeight: 600, color: 'var(--color-text-heading)' }}>{item}</span>
+                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
+                      <CheckCircle2 size={18} color="var(--color-primary)" style={{ marginTop: '0.2rem', flexShrink: 0 }} />
+                      <span style={{ fontWeight: 600, color: 'var(--color-text-heading)', fontSize: '0.95rem' }}>{item}</span>
                     </div>
                   ))}
                 </div>
@@ -97,7 +97,7 @@ export const AboutPage: React.FC = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   <div
                     style={{
-                      padding: '2.25rem 2rem',
+                      padding: '1.75rem 1.5rem',
                       borderRadius: 'var(--radius-xl)',
                       backgroundColor: 'var(--color-dark-surface)',
                       color: 'var(--color-text-on-dark)',
@@ -108,17 +108,17 @@ export const AboutPage: React.FC = () => {
                     <span style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', color: '#C084FC' }}>
                       OUR PURPOSE
                     </span>
-                    <h3 style={{ color: '#FFFFFF', fontSize: '1.5rem', marginTop: '0.5rem', marginBottom: '0.85rem' }}>
+                    <h3 style={{ color: '#FFFFFF', fontSize: '1.35rem', marginTop: '0.5rem', marginBottom: '0.85rem' }}>
                       Connecting Expertise with Opportunity
                     </h3>
-                    <p style={{ color: 'var(--color-text-muted-on-dark)', lineHeight: 1.6, fontSize: '0.95rem' }}>
+                    <p style={{ color: 'var(--color-text-muted-on-dark)', lineHeight: 1.6, fontSize: '0.925rem' }}>
                       To connect enterprise organizations and implementation partners with carefully selected SAP and Vistex consultants who help accelerate critical project initiatives.
                     </p>
                   </div>
 
                   <div
                     style={{
-                      padding: '2.25rem 2rem',
+                      padding: '1.75rem 1.5rem',
                       borderRadius: 'var(--radius-xl)',
                       backgroundColor: 'var(--color-primary-light)',
                       border: '1.5px solid rgba(134, 78, 168, 0.3)',
@@ -127,10 +127,10 @@ export const AboutPage: React.FC = () => {
                     <span style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--color-primary)' }}>
                       OUR APPROACH
                     </span>
-                    <h3 style={{ color: 'var(--color-primary-dark)', fontSize: '1.5rem', marginTop: '0.5rem', marginBottom: '0.85rem' }}>
+                    <h3 style={{ color: 'var(--color-primary-dark)', fontSize: '1.35rem', marginTop: '0.5rem', marginBottom: '0.85rem' }}>
                       Flexible & Role-Focused
                     </h3>
-                    <p style={{ color: 'var(--color-text-body)', lineHeight: 1.6, fontSize: '0.95rem' }}>
+                    <p style={{ color: 'var(--color-text-body)', lineHeight: 1.6, fontSize: '0.925rem' }}>
                       Providing flexible staffing models and specialized expertise tailored to project-specific SAP and Vistex requirements.
                     </p>
                   </div>
@@ -143,9 +143,9 @@ export const AboutPage: React.FC = () => {
         {/* Our Core Approach */}
         <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-subtle)' }}>
           <div className="container">
-            <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 3.5rem auto' }}>
+            <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 3rem auto' }}>
               <div className="eyebrow">Our Principles</div>
-              <h2>How We Partner With You</h2>
+              <h2 style={{ fontSize: 'clamp(1.75rem, 4.5vw, 3rem)' }}>How We Partner With You</h2>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', marginTop: '0.75rem' }}>
                 Delivering reliable SAP and Vistex resource alignment for project success.
               </p>
@@ -155,14 +155,14 @@ export const AboutPage: React.FC = () => {
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                gap: '1.75rem',
+                gap: '1.5rem',
               }}
             >
               {principles.map((item, i) => (
                 <div
                   key={i}
                   style={{
-                    padding: '2rem 1.5rem',
+                    padding: '1.75rem 1.5rem',
                     borderRadius: 'var(--radius-lg)',
                     backgroundColor: 'var(--color-bg-light)',
                     border: '1px solid var(--color-border)',
@@ -203,6 +203,11 @@ export const AboutPage: React.FC = () => {
           }
           .about-hero-right {
             grid-column: span 5 !important;
+          }
+        }
+        @media (max-width: 576px) {
+          .desktop-br-only {
+            display: none !important;
           }
         }
       `}</style>

@@ -85,11 +85,11 @@ export const ContactPage: React.FC = () => {
           <div className="container">
             <div style={{ maxWidth: '800px' }}>
               <div className="eyebrow">Connect With Us</div>
-              <h1 style={{ marginBottom: '1.25rem', color: 'var(--color-text-heading)' }}>
-                Contact Nova Sitara <br />
+              <h1 style={{ marginBottom: '1.25rem', color: 'var(--color-text-heading)', fontSize: 'clamp(1.85rem, 5vw, 3.5rem)', wordBreak: 'break-word' }}>
+                Contact Nova Sitara <br className="desktop-br-only" />
                 <span style={{ color: 'var(--color-primary)' }}>Get in Touch with Our Team.</span>
               </h1>
-              <p style={{ fontSize: '1.15rem', lineHeight: 1.6, color: 'var(--color-text-body)' }}>
+              <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', lineHeight: 1.6, color: 'var(--color-text-body)' }}>
                 Whether you need specialized Vistex consulting, SAP implementation support, or technology staffing, our team is ready to discuss your project requirements.
               </p>
             </div>
@@ -103,24 +103,24 @@ export const ContactPage: React.FC = () => {
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(12, 1fr)',
-                gap: '3.5rem',
+                gap: '2.5rem',
               }}
             >
               {/* Left Column: Direct Contacts & Operating Hours */}
               <div style={{ gridColumn: 'span 12' }} className="contact-info-col">
-                <h2 style={{ fontSize: '1.75rem', marginBottom: '1.5rem' }}>Contact Information</h2>
-                <p style={{ fontSize: '1.05rem', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '2.5rem' }}>
+                <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 1.75rem)', marginBottom: '1.25rem' }}>Contact Information</h2>
+                <p style={{ fontSize: '1rem', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
                   Reach out directly via phone or email, or submit an inquiry using the form below.
                 </p>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   {/* Phone Details */}
                   <div
                     style={{
                       display: 'flex',
                       alignItems: 'flex-start',
-                      gap: '1.25rem',
-                      padding: '1.5rem',
+                      gap: '1rem',
+                      padding: '1.25rem 1.5rem',
                       borderRadius: 'var(--radius-lg)',
                       backgroundColor: 'var(--color-bg-subtle)',
                       border: '1px solid var(--color-border)',
@@ -128,8 +128,8 @@ export const ContactPage: React.FC = () => {
                   >
                     <div
                       style={{
-                        width: '48px',
-                        height: '48px',
+                        width: '44px',
+                        height: '44px',
                         borderRadius: 'var(--radius-md)',
                         backgroundColor: 'var(--color-primary-light)',
                         color: 'var(--color-primary)',
@@ -139,14 +139,14 @@ export const ContactPage: React.FC = () => {
                         flexShrink: 0,
                       }}
                     >
-                      <Phone size={22} />
+                      <Phone size={20} />
                     </div>
                     <div>
-                      <h4 style={{ fontSize: '1.1rem', marginBottom: '0.35rem' }}>Telephone Contacts</h4>
-                      <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--color-text-heading)' }}>
+                      <h4 style={{ fontSize: '1.05rem', marginBottom: '0.35rem' }}>Telephone Contacts</h4>
+                      <p style={{ fontSize: '0.925rem', fontWeight: 600, color: 'var(--color-text-heading)' }}>
                         India: {companyInfo.phones.india}
                       </p>
-                      <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--color-text-heading)' }}>
+                      <p style={{ fontSize: '0.925rem', fontWeight: 600, color: 'var(--color-text-heading)' }}>
                         Germany: {companyInfo.phones.germany}
                       </p>
                     </div>
@@ -157,8 +157,8 @@ export const ContactPage: React.FC = () => {
                     style={{
                       display: 'flex',
                       alignItems: 'flex-start',
-                      gap: '1.25rem',
-                      padding: '1.5rem',
+                      gap: '1rem',
+                      padding: '1.25rem 1.5rem',
                       borderRadius: 'var(--radius-lg)',
                       backgroundColor: 'var(--color-bg-subtle)',
                       border: '1px solid var(--color-border)',
@@ -166,8 +166,8 @@ export const ContactPage: React.FC = () => {
                   >
                     <div
                       style={{
-                        width: '48px',
-                        height: '48px',
+                        width: '44px',
+                        height: '44px',
                         borderRadius: 'var(--radius-md)',
                         backgroundColor: 'var(--color-primary-light)',
                         color: 'var(--color-primary)',
@@ -177,13 +177,13 @@ export const ContactPage: React.FC = () => {
                         flexShrink: 0,
                       }}
                     >
-                      <Mail size={22} />
+                      <Mail size={20} />
                     </div>
-                    <div>
-                      <h4 style={{ fontSize: '1.1rem', marginBottom: '0.35rem' }}>Email Inquiries</h4>
+                    <div style={{ wordBreak: 'break-word', maxWidth: '100%' }}>
+                      <h4 style={{ fontSize: '1.05rem', marginBottom: '0.35rem' }}>Email Inquiries</h4>
                       <a
                         href={`mailto:${companyInfo.email}`}
-                        style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--color-primary)' }}
+                        style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--color-primary)', wordBreak: 'break-all' }}
                       >
                         {companyInfo.email}
                       </a>
@@ -195,8 +195,8 @@ export const ContactPage: React.FC = () => {
                     style={{
                       display: 'flex',
                       alignItems: 'flex-start',
-                      gap: '1.25rem',
-                      padding: '1.5rem',
+                      gap: '1rem',
+                      padding: '1.25rem 1.5rem',
                       borderRadius: 'var(--radius-lg)',
                       backgroundColor: 'var(--color-bg-subtle)',
                       border: '1px solid var(--color-border)',
@@ -204,8 +204,8 @@ export const ContactPage: React.FC = () => {
                   >
                     <div
                       style={{
-                        width: '48px',
-                        height: '48px',
+                        width: '44px',
+                        height: '44px',
                         borderRadius: 'var(--radius-md)',
                         backgroundColor: 'var(--color-primary-light)',
                         color: 'var(--color-primary)',
@@ -215,14 +215,14 @@ export const ContactPage: React.FC = () => {
                         flexShrink: 0,
                       }}
                     >
-                      <Clock size={22} />
+                      <Clock size={20} />
                     </div>
                     <div>
-                      <h4 style={{ fontSize: '1.1rem', marginBottom: '0.35rem' }}>Business Hours</h4>
-                      <p style={{ fontSize: '0.925rem', color: 'var(--color-text-body)' }}>
+                      <h4 style={{ fontSize: '1.05rem', marginBottom: '0.35rem' }}>Business Hours</h4>
+                      <p style={{ fontSize: '0.9rem', color: 'var(--color-text-body)' }}>
                         {companyInfo.businessHours.weekdays}
                       </p>
-                      <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
                         {companyInfo.businessHours.weekends}
                       </p>
                     </div>
@@ -238,16 +238,17 @@ export const ContactPage: React.FC = () => {
                       borderRadius: 'var(--radius-lg)',
                       backgroundColor: 'var(--color-dark-surface)',
                       color: '#FFFFFF',
+                      wordBreak: 'break-word',
                     }}
                   >
-                    <Linkedin size={24} color="#C084FC" />
-                    <div>
-                      <p style={{ fontSize: '0.95rem', fontWeight: 600 }}>Nova Sitara LinkedIn</p>
+                    <Linkedin size={22} color="#C084FC" style={{ flexShrink: 0 }} />
+                    <div style={{ wordBreak: 'break-word', maxWidth: '100%' }}>
+                      <p style={{ fontSize: '0.925rem', fontWeight: 600, margin: 0 }}>Nova Sitara LinkedIn</p>
                       <a
                         href={companyInfo.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ fontSize: '0.85rem', color: '#C084FC', textDecoration: 'underline' }}
+                        style={{ fontSize: '0.825rem', color: '#C084FC', textDecoration: 'underline', wordBreak: 'break-all' }}
                       >
                         https://www.linkedin.com/company/novasitara/
                       </a>
@@ -260,31 +261,31 @@ export const ContactPage: React.FC = () => {
               <div style={{ gridColumn: 'span 12' }} className="contact-form-col">
                 <div
                   style={{
-                    padding: '2.5rem 2rem',
+                    padding: 'clamp(1.5rem, 4vw, 2.5rem)',
                     borderRadius: 'var(--radius-xl)',
                     backgroundColor: 'var(--color-bg-light)',
                     border: '1.5px solid var(--color-border)',
                     boxShadow: 'var(--shadow-lg)',
                   }}
                 >
-                  <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Send Us A Message</h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', marginBottom: '2rem' }}>
-                    Fill out your contact details and inquiry. (Frontend mock submission)
+                  <h3 style={{ fontSize: '1.35rem', marginBottom: '0.35rem' }}>Send Us A Message</h3>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1.75rem' }}>
+                    Fill out your contact details and inquiry.
                   </p>
 
                   {submitSuccess ? (
                     <div
                       style={{
-                        padding: '2.5rem 2rem',
+                        padding: '2rem 1.5rem',
                         borderRadius: 'var(--radius-lg)',
                         backgroundColor: 'var(--color-success-bg)',
                         border: '1px solid rgba(16, 185, 129, 0.3)',
                         textAlign: 'center',
                       }}
                     >
-                      <CheckCircle2 size={48} color="var(--color-success)" style={{ margin: '0 auto 1rem auto' }} />
-                      <h4 style={{ color: '#065F46', fontSize: '1.35rem', marginBottom: '0.5rem' }}>Inquiry Submitted (Mock Demo)</h4>
-                      <p style={{ fontSize: '0.95rem', color: '#047857', lineHeight: 1.6 }}>
+                      <CheckCircle2 size={44} color="var(--color-success)" style={{ margin: '0 auto 1rem auto' }} />
+                      <h4 style={{ color: '#065F46', fontSize: '1.25rem', marginBottom: '0.5rem' }}>Inquiry Submitted</h4>
+                      <p style={{ fontSize: '0.9rem', color: '#047857', lineHeight: 1.6 }}>
                         {submitMessage}
                       </p>
                       <button
@@ -301,8 +302,8 @@ export const ContactPage: React.FC = () => {
                           });
                         }}
                         style={{
-                          marginTop: '1.75rem',
-                          fontSize: '0.9rem',
+                          marginTop: '1.5rem',
+                          fontSize: '0.875rem',
                           fontWeight: 600,
                           color: 'var(--color-primary)',
                           textDecoration: 'underline',
@@ -475,7 +476,7 @@ export const ContactPage: React.FC = () => {
                         {errors.message && <span style={{ color: 'var(--color-error)', fontSize: '0.775rem' }}>{errors.message}</span>}
                       </div>
 
-                      <Button type="submit" variant="primary" size="lg" isLoading={isSubmitting} rightIcon={<Send size={18} />}>
+                      <Button type="submit" variant="primary" size="lg" isLoading={isSubmitting} rightIcon={<Send size={18} />} style={{ width: '100%' }}>
                         Submit Inquiry
                       </Button>
                     </form>
@@ -494,6 +495,11 @@ export const ContactPage: React.FC = () => {
           }
           .contact-form-col {
             grid-column: span 7 !important;
+          }
+        }
+        @media (max-width: 576px) {
+          .desktop-br-only {
+            display: none !important;
           }
         }
       `}</style>

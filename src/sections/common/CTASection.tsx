@@ -42,8 +42,8 @@ export const CTASection: React.FC<CTASectionProps> = ({
       style={{
         backgroundColor: '#000000',
         color: '#FFFFFF',
-        paddingTop: 'clamp(5.5rem, 9vw, 8rem)',
-        paddingBottom: 'clamp(5.5rem, 9vw, 8rem)',
+        paddingTop: 'clamp(4rem, 8vw, 8rem)',
+        paddingBottom: 'clamp(4rem, 8vw, 8rem)',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -88,12 +88,13 @@ export const CTASection: React.FC<CTASectionProps> = ({
           {/* Large White Heading */}
           <h2
             style={{
-              fontSize: 'clamp(2.2rem, 5vw, 4rem)',
+              fontSize: 'clamp(1.85rem, 5vw, 4rem)',
               fontWeight: 800,
               color: '#FFFFFF',
               lineHeight: 1.12,
               letterSpacing: '-0.035em',
               marginBottom: '1.5rem',
+              wordBreak: 'break-word',
             }}
           >
             <span className="text-mask-wrapper">
@@ -103,7 +104,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
             </span>
             {!title && (
               <>
-                <br />
+                <br className="desktop-br-only" />
                 <span className="text-mask-wrapper">
                   <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '300ms' }}>
                     that needs the right expertise?
@@ -116,7 +117,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
           {/* Supporting Text */}
           <p
             style={{
-              fontSize: 'clamp(1.05rem, 1.8vw, 1.2rem)',
+              fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
               lineHeight: 1.6,
               color: 'rgba(255, 255, 255, 0.85)',
               maxWidth: '640px',
@@ -138,9 +139,10 @@ export const CTASection: React.FC<CTASectionProps> = ({
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
               transition: 'opacity 600ms ease 600ms, transform 600ms ease 600ms',
+              width: '100%',
             }}
           >
-            <Link to={buttonLink}>
+            <Link to={buttonLink} style={{ display: 'inline-block', width: '100%', maxWidth: '320px' }}>
               <Button
                 variant="primary"
                 size="lg"
@@ -148,8 +150,9 @@ export const CTASection: React.FC<CTASectionProps> = ({
                 style={{
                   backgroundColor: '#864EA8',
                   borderRadius: '12px',
-                  padding: '0.95rem 2.25rem',
+                  padding: '0.95rem 2rem',
                   boxShadow: '0 8px 24px rgba(134, 78, 168, 0.4)',
+                  width: '100%',
                 }}
               >
                 {buttonText}
@@ -158,6 +161,14 @@ export const CTASection: React.FC<CTASectionProps> = ({
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 576px) {
+          .desktop-br-only {
+            display: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

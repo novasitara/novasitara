@@ -36,11 +36,11 @@ export const CareersPage: React.FC = () => {
           <div className="container">
             <div style={{ maxWidth: '800px' }}>
               <div className="eyebrow">Join Our Expert Team</div>
-              <h1 style={{ marginBottom: '1.25rem', color: 'var(--color-text-heading)' }}>
-                Build Your Consulting Career with <br />
+              <h1 style={{ marginBottom: '1.25rem', color: 'var(--color-text-heading)', fontSize: 'clamp(1.85rem, 5vw, 3.5rem)', wordBreak: 'break-word' }}>
+                Build Your Consulting Career with <br className="desktop-br-only" />
                 <span style={{ color: 'var(--color-primary)' }}>SAP & Vistex Leaders.</span>
               </h1>
-              <p style={{ fontSize: '1.15rem', lineHeight: 1.6, color: 'var(--color-text-body)' }}>
+              <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', lineHeight: 1.6, color: 'var(--color-text-body)' }}>
                 Work on global enterprise implementation projects, solve complex incentive challenges, and accelerate your functional and technical mastery.
               </p>
             </div>
@@ -52,6 +52,7 @@ export const CareersPage: React.FC = () => {
           <div className="container">
             {/* Filter & Search Bar */}
             <div
+              className="careers-filter-bar"
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -76,7 +77,8 @@ export const CareersPage: React.FC = () => {
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--color-border)',
                   flex: 1,
-                  minWidth: '240px',
+                  minWidth: '200px',
+                  width: '100%',
                 }}
               >
                 <Search size={18} color="var(--color-text-muted)" />
@@ -98,7 +100,7 @@ export const CareersPage: React.FC = () => {
               </div>
 
               {/* Department Filter */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', maxWidth: '280px' }}>
                 <Filter size={16} color="var(--color-text-muted)" />
                 <select
                   value={selectedDept}
@@ -112,6 +114,7 @@ export const CareersPage: React.FC = () => {
                     fontFamily: 'inherit',
                     cursor: 'pointer',
                     color: 'var(--color-text-heading)',
+                    width: '100%',
                   }}
                   aria-label="Filter by Department"
                 >
@@ -130,8 +133,8 @@ export const CareersPage: React.FC = () => {
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                  gap: '2rem',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '1.5rem',
                 }}
               >
                 {filteredJobs.map((job) => (
@@ -141,7 +144,7 @@ export const CareersPage: React.FC = () => {
             ) : (
               <div
                 style={{
-                  padding: '4rem 2rem',
+                  padding: '4rem 1.5rem',
                   textAlign: 'center',
                   backgroundColor: 'var(--color-bg-subtle)',
                   borderRadius: 'var(--radius-xl)',
@@ -160,6 +163,18 @@ export const CareersPage: React.FC = () => {
 
         <CTASection title="Don't See Your Exact Role?" subtitle="We are always looking for exceptional SAP and Vistex consultants. Submit a general inquiry to our talent team." />
       </main>
+
+      <style>{`
+        @media (max-width: 576px) {
+          .desktop-br-only {
+            display: none !important;
+          }
+          .careers-filter-bar {
+            flex-direction: column !important;
+            align-items: stretch !important;
+          }
+        }
+      `}</style>
     </>
   );
 };

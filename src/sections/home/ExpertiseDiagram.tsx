@@ -29,8 +29,8 @@ export const ExpertiseDiagram: React.FC = () => {
       ref={sectionRef}
       style={{
         backgroundColor: '#FFFFFF',
-        paddingTop: 'clamp(5rem, 8vw, 7rem)',
-        paddingBottom: 'clamp(5rem, 8vw, 7rem)',
+        paddingTop: 'clamp(3.5rem, 7vw, 7rem)',
+        paddingBottom: 'clamp(3.5rem, 7vw, 7rem)',
         borderBottom: '1px solid var(--color-border)',
         position: 'relative',
         overflow: 'hidden',
@@ -38,11 +38,11 @@ export const ExpertiseDiagram: React.FC = () => {
     >
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         {/* Section Header */}
-        <div style={{ maxWidth: '760px', marginBottom: '3.5rem' }}>
+        <div style={{ maxWidth: '760px', marginBottom: '3rem' }}>
           <div className="eyebrow" style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 400ms ease' }}>
             SPECIALIZED CAPABILITIES
           </div>
-          <h2 style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', color: '#000000', lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.85rem, 4.5vw, 3.5rem)', color: '#000000', lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>
             <span className="text-mask-wrapper">
               <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`}>
                 Specialized Where Expertise
@@ -74,10 +74,11 @@ export const ExpertiseDiagram: React.FC = () => {
             <div
               onMouseEnter={() => setHoveredCard('vistex')}
               onMouseLeave={() => setHoveredCard(null)}
+              className="vistex-purple-card"
               style={{
                 height: '100%',
                 minHeight: '580px',
-                padding: 'clamp(2rem, 3.5vw, 3rem)',
+                padding: 'clamp(1.5rem, 3.5vw, 3rem)',
                 borderRadius: '24px',
                 backgroundColor: '#864EA8',
                 backgroundImage: 'linear-gradient(145deg, #864EA8 0%, #5B21B6 100%)',
@@ -93,6 +94,7 @@ export const ExpertiseDiagram: React.FC = () => {
                 transition: 'transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease',
                 opacity: isVisible ? 1 : 0,
                 transitionDelay: '100ms',
+                maxWidth: '100%',
               }}
             >
               {/* Top Typography Header */}
@@ -112,7 +114,7 @@ export const ExpertiseDiagram: React.FC = () => {
                 </span>
                 <h3
                   style={{
-                    fontSize: 'clamp(2.75rem, 5vw, 3.75rem)',
+                    fontSize: 'clamp(2.2rem, 5vw, 3.75rem)',
                     color: '#FFFFFF',
                     fontWeight: 800,
                     letterSpacing: '-0.03em',
@@ -129,15 +131,15 @@ export const ExpertiseDiagram: React.FC = () => {
                 style={{
                   position: 'relative',
                   width: '100%',
-                  height: '260px',
-                  margin: '1.5rem 0',
+                  height: '240px',
+                  margin: '1.25rem 0',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   zIndex: 2,
                 }}
               >
-                <svg viewBox="0 0 380 260" fill="none" style={{ width: '100%', height: '100%' }}>
+                <svg viewBox="0 0 380 260" fill="none" style={{ width: '100%', height: '100%', maxWidth: '380px' }}>
                   <g opacity="0.3">
                     <path d="M 40 130 L 190 50 L 340 130 L 190 210 Z" stroke="#FFFFFF" strokeWidth="1" />
                     <line x1="190" y1="50" x2="190" y2="210" stroke="#FFFFFF" strokeWidth="1" strokeDasharray="3 3" />
@@ -179,10 +181,10 @@ export const ExpertiseDiagram: React.FC = () => {
 
               {/* Lower Title, Copy & CTA */}
               <div style={{ position: 'relative', zIndex: 2 }}>
-                <h4 style={{ fontSize: '1.4rem', color: '#FFFFFF', fontWeight: 700, marginBottom: '0.4rem' }}>
+                <h4 style={{ fontSize: '1.3rem', color: '#FFFFFF', fontWeight: 700, marginBottom: '0.4rem' }}>
                   Vistex Sourcing & Consulting
                 </h4>
-                <p style={{ fontSize: '0.925rem', lineHeight: 1.55, color: 'rgba(255, 255, 255, 0.9)', maxWidth: '340px', marginBottom: '1.5rem' }}>
+                <p style={{ fontSize: '0.9rem', lineHeight: 1.55, color: 'rgba(255, 255, 255, 0.9)', maxWidth: '340px', marginBottom: '1.25rem' }}>
                   Nova Sitara's primary focus in providing specialized Vistex consultants for project roles.
                 </p>
 
@@ -200,6 +202,7 @@ export const ExpertiseDiagram: React.FC = () => {
                     borderRadius: '12px',
                     backdropFilter: 'blur(6px)',
                     transition: 'all 200ms ease',
+                    maxWidth: '100%',
                   }}
                 >
                   <span>Explore Vistex Capabilities</span>
@@ -224,8 +227,9 @@ export const ExpertiseDiagram: React.FC = () => {
               <div
                 onMouseEnter={() => setHoveredCard('ewm')}
                 onMouseLeave={() => setHoveredCard(null)}
+                className="bento-card"
                 style={{
-                  padding: '1.75rem',
+                  padding: '1.5rem',
                   borderRadius: '20px',
                   backgroundColor: '#FFFFFF',
                   border: '1px solid #E8E5EC',
@@ -233,14 +237,14 @@ export const ExpertiseDiagram: React.FC = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  minHeight: '275px',
+                  minHeight: '260px',
                   transform: hoveredCard === 'ewm' ? 'translateY(-4px)' : 'translateY(0)',
                   transition: 'all 300ms cubic-bezier(0.16, 1, 0.3, 1)',
                   opacity: isVisible ? 1 : 0,
                   transitionDelay: '200ms',
                 }}
               >
-                <div style={{ width: '100%', height: '120px', marginBottom: '1rem' }}>
+                <div style={{ width: '100%', height: '110px', marginBottom: '0.85rem' }}>
                   <svg viewBox="0 0 220 120" fill="none" style={{ width: '100%', height: '100%' }}>
                     <g transform="translate(0, 0)">
                       <rect x="0" y="0" width="48" height="24" rx="4" fill="#008FD3" />
@@ -261,7 +265,7 @@ export const ExpertiseDiagram: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#111116', marginBottom: '0.35rem' }}>
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#111116', marginBottom: '0.35rem' }}>
                     SAP EWM
                   </h4>
                   <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', lineHeight: 1.55, margin: 0 }}>
@@ -274,8 +278,9 @@ export const ExpertiseDiagram: React.FC = () => {
               <div
                 onMouseEnter={() => setHoveredCard('sd')}
                 onMouseLeave={() => setHoveredCard(null)}
+                className="bento-card"
                 style={{
-                  padding: '1.75rem',
+                  padding: '1.5rem',
                   borderRadius: '20px',
                   backgroundColor: '#FFFFFF',
                   border: '1px solid #E8E5EC',
@@ -283,14 +288,14 @@ export const ExpertiseDiagram: React.FC = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  minHeight: '275px',
+                  minHeight: '260px',
                   transform: hoveredCard === 'sd' ? 'translateY(-4px)' : 'translateY(0)',
                   transition: 'all 300ms cubic-bezier(0.16, 1, 0.3, 1)',
                   opacity: isVisible ? 1 : 0,
                   transitionDelay: '300ms',
                 }}
               >
-                <div style={{ width: '100%', height: '120px', marginBottom: '1rem' }}>
+                <div style={{ width: '100%', height: '110px', marginBottom: '0.85rem' }}>
                   <svg viewBox="0 0 220 120" fill="none" style={{ width: '100%', height: '100%' }}>
                     <g transform="translate(0, 0)">
                       <rect x="0" y="0" width="38" height="22" rx="4" fill="#0284C7" />
@@ -311,7 +316,7 @@ export const ExpertiseDiagram: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#111116', marginBottom: '0.35rem' }}>
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#111116', marginBottom: '0.35rem' }}>
                     SAP SD
                   </h4>
                   <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', lineHeight: 1.55, margin: 0 }}>
@@ -324,8 +329,9 @@ export const ExpertiseDiagram: React.FC = () => {
               <div
                 onMouseEnter={() => setHoveredCard('mm')}
                 onMouseLeave={() => setHoveredCard(null)}
+                className="bento-card"
                 style={{
-                  padding: '1.75rem',
+                  padding: '1.5rem',
                   borderRadius: '20px',
                   backgroundColor: '#FFFFFF',
                   border: '1px solid #E8E5EC',
@@ -333,14 +339,14 @@ export const ExpertiseDiagram: React.FC = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  minHeight: '275px',
+                  minHeight: '260px',
                   transform: hoveredCard === 'mm' ? 'translateY(-4px)' : 'translateY(0)',
                   transition: 'all 300ms cubic-bezier(0.16, 1, 0.3, 1)',
                   opacity: isVisible ? 1 : 0,
                   transitionDelay: '400ms',
                 }}
               >
-                <div style={{ width: '100%', height: '120px', marginBottom: '1rem' }}>
+                <div style={{ width: '100%', height: '110px', marginBottom: '0.85rem' }}>
                   <svg viewBox="0 0 220 120" fill="none" style={{ width: '100%', height: '100%' }}>
                     <g transform="translate(0, 0)">
                       <rect x="0" y="0" width="48" height="24" rx="4" fill="#008FD3" />
@@ -361,7 +367,7 @@ export const ExpertiseDiagram: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#111116', marginBottom: '0.35rem' }}>
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#111116', marginBottom: '0.35rem' }}>
                     SAP MM
                   </h4>
                   <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', lineHeight: 1.55, margin: 0 }}>
@@ -374,8 +380,9 @@ export const ExpertiseDiagram: React.FC = () => {
               <div
                 onMouseEnter={() => setHoveredCard('abap')}
                 onMouseLeave={() => setHoveredCard(null)}
+                className="bento-card"
                 style={{
-                  padding: '1.75rem',
+                  padding: '1.5rem',
                   borderRadius: '20px',
                   backgroundColor: '#6D28D9',
                   backgroundImage: 'linear-gradient(145deg, #7C3AED 0%, #5B21B6 100%)',
@@ -384,14 +391,14 @@ export const ExpertiseDiagram: React.FC = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  minHeight: '275px',
+                  minHeight: '260px',
                   transform: hoveredCard === 'abap' ? 'translateY(-4px)' : 'translateY(0)',
                   transition: 'all 300ms cubic-bezier(0.16, 1, 0.3, 1)',
                   opacity: isVisible ? 1 : 0,
                   transitionDelay: '500ms',
                 }}
               >
-                <div style={{ width: '100%', height: '120px', marginBottom: '1rem' }}>
+                <div style={{ width: '100%', height: '110px', marginBottom: '0.85rem' }}>
                   <svg viewBox="0 0 220 120" fill="none" style={{ width: '100%', height: '100%' }}>
                     <g transform="translate(40, 5)">
                       <rect x="0" y="10" width="120" height="85" rx="8" fill="rgba(255, 255, 255, 0.15)" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1.5" />
@@ -408,7 +415,7 @@ export const ExpertiseDiagram: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#FFFFFF', marginBottom: '0.35rem' }}>
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#FFFFFF', marginBottom: '0.35rem' }}>
                     ABAP Development
                   </h4>
                   <p style={{ fontSize: '0.875rem', color: 'rgba(255, 255, 255, 0.9)', lineHeight: 1.55, margin: 0 }}>
@@ -430,9 +437,17 @@ export const ExpertiseDiagram: React.FC = () => {
             grid-column: span 7 !important;
           }
         }
+        @media (max-width: 991px) {
+          .vistex-purple-card {
+            min-height: auto !important;
+          }
+        }
         @media (max-width: 768px) {
           .exp-sub-grid {
             grid-template-columns: repeat(1, 1fr) !important;
+          }
+          .bento-card {
+            min-height: auto !important;
           }
         }
       `}</style>

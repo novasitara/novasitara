@@ -168,27 +168,29 @@ export const JobDetailsPage: React.FC = () => {
 
             <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
                   <Badge variant="purple">{job.department}</Badge>
                   <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>Posted {job.postedDate}</span>
                 </div>
-                <h1 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', color: 'var(--color-text-heading)' }}>
+                <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)', color: 'var(--color-text-heading)', wordBreak: 'break-word' }}>
                   {job.title}
                 </h1>
               </div>
 
-              <a href="#apply-form">
-                <Button variant="primary" size="lg">
-                  Apply for Position
-                </Button>
-              </a>
+              <div style={{ width: '100%', maxWidth: '280px' }}>
+                <a href="#apply-form" style={{ display: 'inline-block', width: '100%' }}>
+                  <Button variant="primary" size="lg" style={{ width: '100%' }}>
+                    Apply for Position
+                  </Button>
+                </a>
+              </div>
             </div>
 
             <div
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: '1.5rem',
+                gap: '1.25rem',
                 fontSize: '0.925rem',
                 marginTop: '1.5rem',
                 paddingTop: '1.25rem',
@@ -218,7 +220,7 @@ export const JobDetailsPage: React.FC = () => {
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(12, 1fr)',
-                gap: '3.5rem',
+                gap: '2.5rem',
               }}
             >
               {/* Left Column: Job Details */}
@@ -239,7 +241,7 @@ export const JobDetailsPage: React.FC = () => {
                       {job.responsibilities.map((resp, i) => (
                         <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
                           <CheckCircle2 size={18} color="var(--color-primary)" style={{ marginTop: '0.2rem', flexShrink: 0 }} />
-                          <span style={{ fontSize: '0.975rem', lineHeight: 1.6, color: 'var(--color-text-body)' }}>{resp}</span>
+                          <span style={{ fontSize: '0.95rem', lineHeight: 1.6, color: 'var(--color-text-body)' }}>{resp}</span>
                         </div>
                       ))}
                     </div>
@@ -252,7 +254,7 @@ export const JobDetailsPage: React.FC = () => {
                       {job.requirements.map((req, i) => (
                         <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
                           <CheckCircle2 size={18} color="var(--color-primary)" style={{ marginTop: '0.2rem', flexShrink: 0 }} />
-                          <span style={{ fontSize: '0.975rem', lineHeight: 1.6, color: 'var(--color-text-body)' }}>{req}</span>
+                          <span style={{ fontSize: '0.95rem', lineHeight: 1.6, color: 'var(--color-text-body)' }}>{req}</span>
                         </div>
                       ))}
                     </div>
@@ -270,7 +272,7 @@ export const JobDetailsPage: React.FC = () => {
                             borderRadius: 'var(--radius-full)',
                             backgroundColor: 'var(--color-bg-subtle)',
                             border: '1px solid var(--color-border)',
-                            fontSize: '0.875rem',
+                            fontSize: '0.85rem',
                             fontWeight: 500,
                           }}
                         >
@@ -283,7 +285,7 @@ export const JobDetailsPage: React.FC = () => {
                   {/* Benefits */}
                   <div>
                     <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>What We Offer</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                       {job.benefits.map((b, i) => (
                         <div
                           key={i}
@@ -311,7 +313,7 @@ export const JobDetailsPage: React.FC = () => {
                   style={{
                     position: 'sticky',
                     top: '100px',
-                    padding: '2.25rem 2rem',
+                    padding: 'clamp(1.5rem, 4vw, 2.25rem)',
                     borderRadius: 'var(--radius-xl)',
                     backgroundColor: 'var(--color-bg-subtle)',
                     border: '1.5px solid var(--color-border)',
@@ -584,7 +586,7 @@ export const JobDetailsPage: React.FC = () => {
                         />
                       </div>
 
-                      <Button type="submit" variant="primary" size="lg" isLoading={isSubmitting} rightIcon={<Send size={16} />}>
+                      <Button type="submit" variant="primary" size="lg" isLoading={isSubmitting} rightIcon={<Send size={16} />} style={{ width: '100%' }}>
                         Submit Application
                       </Button>
                     </form>

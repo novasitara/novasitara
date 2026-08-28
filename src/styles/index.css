@@ -17,11 +17,15 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -32,6 +36,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
 }
 
@@ -48,22 +53,23 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.03em;
+  word-break: break-word;
 }
 
 h1 {
-  font-size: clamp(2.2rem, 7vw, 4.25rem);
+  font-size: clamp(1.85rem, 5.5vw, 4.25rem);
   font-weight: 800;
   letter-spacing: -0.035em;
 }
 
 h2 {
-  font-size: clamp(1.85rem, 5.5vw, 3.25rem);
+  font-size: clamp(1.65rem, 4.5vw, 3.25rem);
   font-weight: 700;
   letter-spacing: -0.03em;
 }
 
 h3 {
-  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-size: clamp(1.2rem, 3vw, 2rem);
   font-weight: 600;
 }
 
@@ -74,6 +80,7 @@ h4 {
 
 p {
   color: var(--color-text-body);
+  word-break: break-word;
 }
 
 a {
@@ -112,6 +119,7 @@ img, svg, video {
   margin-right: auto;
   padding-left: var(--container-padding);
   padding-right: var(--container-padding);
+  box-sizing: border-box;
 }
 
 .container-narrow {
@@ -121,6 +129,7 @@ img, svg, video {
   margin-right: auto;
   padding-left: var(--container-padding);
   padding-right: var(--container-padding);
+  box-sizing: border-box;
 }
 
 /* Section Spacing */
@@ -159,9 +168,12 @@ img, svg, video {
   margin: var(--space-element) 0;
 }
 
-/* Responsive Grid Form Helpers */
+/* Responsive Grid Form Helpers & Desktop BR hiding */
 @media (max-width: 576px) {
   .form-grid-2col {
     grid-template-columns: 1fr !important;
+  }
+  .desktop-br-only {
+    display: none !important;
   }
 }

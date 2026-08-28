@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Target, Hexagon, Users, ShieldCheck } from 'lucide-react';
 import { Button } from '../../components/common/Button';
-import aboutGraphicImg from '/@fs/C:/Users/Mohithsai Malla/.gemini/antigravity/brain/cff265d6-6700-4d41-a668-ad0601c90b86/.user_uploaded/media_1787909943670.jpg';
 
 export const AboutPreview: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,7 +37,7 @@ export const AboutPreview: React.FC = () => {
       }}
     >
       <div className="container" style={{ maxWidth: '1420px', position: 'relative', zIndex: 2 }}>
-        {/* Main Two-Column Composition: ~42% Left Content / ~58% Right Preferred Image Asset */}
+        {/* Main Two-Column Composition: ~42% Left Content / ~58% Right Image Asset */}
         <div
           style={{
             display: 'grid',
@@ -197,7 +196,7 @@ export const AboutPreview: React.FC = () => {
             </div>
           </div>
 
-          {/* RIGHT COLUMN (~58% Width / 7 Columns): Preferred Clean White Graphic Image (media_1787909943670.jpg) */}
+          {/* RIGHT COLUMN (~58% Width / 7 Columns): Public Image Asset /images/about.png */}
           <div style={{ gridColumn: 'span 12' }} className="about-redesign-right">
             <div
               style={{
@@ -224,7 +223,7 @@ export const AboutPreview: React.FC = () => {
                 }}
               >
                 <img
-                  src={aboutGraphicImg}
+                  src="/images/about.png"
                   alt="Nova Sitara Enterprise Architecture & Sourcing Flow"
                   style={{
                     width: '100%',

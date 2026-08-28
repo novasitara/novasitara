@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import sapLogoImg from '/@fs/C:/Users/Mohithsai Malla/.gemini/antigravity/brain/cff265d6-6700-4d41-a668-ad0601c90b86/.user_uploaded/media_1787794648343.png';
 
 export const ExpertiseDiagram: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -243,7 +242,12 @@ export const ExpertiseDiagram: React.FC = () => {
               >
                 <div style={{ width: '100%', height: '120px', marginBottom: '1rem' }}>
                   <svg viewBox="0 0 220 120" fill="none" style={{ width: '100%', height: '100%' }}>
-                    <image href={sapLogoImg} x="0" y="0" height="26" />
+                    <g transform="translate(0, 0)">
+                      <rect x="0" y="0" width="48" height="24" rx="4" fill="#008FD3" />
+                      <text x="24" y="16" fill="#FFFFFF" fontSize="13" fontWeight="800" textAnchor="middle" fontFamily="sans-serif">
+                        SAP
+                      </text>
+                    </g>
 
                     <g transform="translate(50, 10)">
                       <path d="M 60 10 L 110 35 L 60 60 L 10 35 Z" fill="#F3E8FF" stroke="#864EA8" strokeWidth="1.5" />
@@ -338,7 +342,12 @@ export const ExpertiseDiagram: React.FC = () => {
               >
                 <div style={{ width: '100%', height: '120px', marginBottom: '1rem' }}>
                   <svg viewBox="0 0 220 120" fill="none" style={{ width: '100%', height: '100%' }}>
-                    <image href={sapLogoImg} x="0" y="0" height="26" />
+                    <g transform="translate(0, 0)">
+                      <rect x="0" y="0" width="48" height="24" rx="4" fill="#008FD3" />
+                      <text x="24" y="16" fill="#FFFFFF" fontSize="13" fontWeight="800" textAnchor="middle" fontFamily="sans-serif">
+                        SAP
+                      </text>
+                    </g>
 
                     <g transform="translate(60, 5)">
                       <path d="M 45 10 L 90 32 L 45 55 L 0 32 Z" stroke="#864EA8" strokeWidth="1.5" fill="rgba(134,78,168,0.08)" />

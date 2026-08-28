@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import heroImg from '/@fs/C:/Users/Mohithsai Malla/.gemini/antigravity/brain/cff265d6-6700-4d41-a668-ad0601c90b86/.user_uploaded/media_1787902924653.jpg';
 
 export const IsometricHeroIllustration: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,10 +23,9 @@ export const IsometricHeroIllustration: React.FC = () => {
         backgroundColor: 'transparent',
       }}
     >
-      {/* Exact Selected User Hero Image (media_1787902924653.jpg with official NS logo pedestal, SAP, Vistex, Integration Hub & Data Transformation Engine) */}
       <img
-        src={heroImg}
-        alt="Nova Sitara NS Enterprise Architecture System Graphic with Data Transformation Engine and NS Pedestal"
+        src="/images/hero.png"
+        alt="Nova Sitara Enterprise SAP Sourcing & Technical Architecture"
         style={{
           width: '100%',
           maxHeight: '560px',

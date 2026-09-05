@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { X, ArrowRight, Phone, Mail } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../common/Button';
+import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { companyInfo } from '../../data/companyInfo';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -12,6 +14,7 @@ interface MobileNavProps {
 
 export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
   const drawerRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   // Handle body scroll lock & keydown (Esc)
   useEffect(() => {
@@ -37,12 +40,12 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const navLinks = [
-    { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' },
-    { label: 'Services', path: '/services' },
-    { label: 'Expertise', path: '/expertise' },
-    { label: 'Careers', path: '/careers' },
-    { label: 'Contact', path: '/contact' },
+    { label: t.nav.home, path: '/' },
+    { label: t.nav.about, path: '/about' },
+    { label: t.nav.services, path: '/services' },
+    { label: t.nav.expertise, path: '/expertise' },
+    { label: t.nav.careers, path: '/careers' },
+    { label: t.nav.contact, path: '/contact' },
   ];
 
   return (
@@ -98,20 +101,23 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           }}
         >
           <Logo height={32} />
-          <button
-            onClick={onClose}
-            style={{
-              padding: '0.5rem',
-              borderRadius: 'var(--radius-full)',
-              color: 'var(--color-text-heading)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-            aria-label="Close Mobile Menu"
-          >
-            <X size={24} />
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <LanguageSwitcher compact />
+            <button
+              onClick={onClose}
+              style={{
+                padding: '0.5rem',
+                borderRadius: 'var(--radius-full)',
+                color: 'var(--color-text-heading)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              aria-label="Close Mobile Menu"
+            >
+              <X size={24} />
+            </button>
+          </div>
         </div>
 
         {/* Links */}
@@ -151,7 +157,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           <div style={{ marginTop: '2rem' }}>
             <NavLink to="/contact" onClick={onClose} style={{ textDecoration: 'none' }}>
               <Button variant="primary" style={{ width: '100%' }}>
-                Talk to Us
+                {t.nav.talkToUs}
               </Button>
             </NavLink>
           </div>

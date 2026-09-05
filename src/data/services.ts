@@ -169,5 +169,25 @@ export const servicesData: ServiceItem[] = [
       "Improved data accuracy and system usability",
       "Seamless cross-module integration"
     ]
+  },
+  {
+    id: "sap-successfactors-consulting",
+    title: "SAP SuccessFactors Consulting",
+    shortDescription: "Cloud HXM consulting across Employee Central, Talent, Learning, and Compensation.",
+    fullDescription: "Transform and optimize your HR and talent operations with specialized SAP SuccessFactors consulting. We provide experienced functional and technical consultants across Employee Central, Recruiting, Onboarding, Performance & Goals, Learning, Compensation, and integrations.",
+    iconName: "UserCheck",
+    featured: false,
+    capabilities: [
+      "SAP SuccessFactors Employee Central Configuration",
+      "Recruiting & Onboarding Process Setup",
+      "Performance & Goals Management Optimization",
+      "Learning & Compensation Module Alignment",
+      "Integration with Core SAP ERP & Third-Party Systems"
+    ],
+    businessBenefits: [
+      "Streamlined HR and workforce experience across the enterprise",
+      "Accelerated adoption of cloud human experience management",
+      "Experienced consultants for implementation, enhancements, and support"
+    ]
   }
 ];

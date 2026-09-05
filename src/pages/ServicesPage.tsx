@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../components/common/SEO';
 import { CTASection } from '../sections/common/CTASection';
 import { servicesData } from '../data/services';
-import { CheckCircle2, ArrowRight, Layers, Compass, Workflow, ArrowUpRight, ShieldCheck, Users, Code2, Cpu } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Layers, Compass, Workflow, ArrowUpRight, ShieldCheck, Users, Code2, Cpu, UserCheck } from 'lucide-react';
 import { Button } from '../components/common/Button';
 
 export const ServicesPage: React.FC = () => {
@@ -17,6 +17,7 @@ export const ServicesPage: React.FC = () => {
       case 'Users': return <Users size={28} />;
       case 'Code2': return <Code2 size={28} />;
       case 'Cpu': return <Cpu size={28} />;
+      case 'UserCheck': return <UserCheck size={28} />;
       default: return <Compass size={28} />;
     }
   };

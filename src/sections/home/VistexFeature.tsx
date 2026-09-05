@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Button } from '../../components/common/Button';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const VistexFeature: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,13 +26,9 @@ export const VistexFeature: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const capabilities = [
-    'Consulting',
-    'Implementation Support',
-    'Enhancement',
-    'Migration',
-    'Application Support',
-  ];
+  const capabilities = language === 'DE'
+    ? ['Beratung & Konzeption', 'Implementierungsunterstützung', 'Systemerweiterung', 'Migration', 'Anwendungsbetreuung']
+    : ['Consulting', 'Implementation Support', 'Enhancement', 'Migration', 'Application Support'];
 
   return (
     <section
@@ -104,10 +102,10 @@ export const VistexFeature: React.FC = () => {
 
               <div style={{ position: 'relative', zIndex: 2 }}>
                 <span style={{ fontSize: '0.825rem', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.8)' }}>
-                  NICHE MARKET SPECIALIZATION
+                  {t.vistexFeature.badge}
                 </span>
-                <h3 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#FFFFFF', margin: '0.25rem 0 0 0' }}>
-                  Vistex Architecture
+                <h3 style={{ fontSize: 'clamp(1.75rem, 3.8vw, 2.35rem)', fontWeight: 800, color: '#FFFFFF', margin: '0.25rem 0 0 0', wordBreak: 'break-word', lineHeight: 1.15 }}>
+                  {t.vistexFeature.cardTitle}
                 </h3>
               </div>
             </div>
@@ -120,11 +118,11 @@ export const VistexFeature: React.FC = () => {
             </div>
 
             <h2 style={{ fontSize: 'clamp(2.25rem, 4vw, 3.25rem)', color: '#000000', lineHeight: 1.15, marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>
-              Dedicated Vistex Sourcing & Consulting.
+              {t.vistexFeature.headline}
             </h2>
 
             <p style={{ fontSize: '1.05rem', lineHeight: 1.65, color: '#22222A', marginBottom: '2rem' }}>
-              With a particular focus on the niche Vistex market, Nova Sitara helps consulting firms, implementation partners and end clients quickly access qualified professionals for specific project roles and skill requirements.
+              {t.vistexFeature.description}
             </p>
 
             {/* Concise Capability Badges */}
@@ -150,7 +148,7 @@ export const VistexFeature: React.FC = () => {
             <div>
               <Link to="/expertise#vistex">
                 <Button variant="primary" size="lg" rightIcon={<ArrowRight size={18} />}>
-                  Explore Vistex Capabilities
+                  {t.vistexFeature.cta}
                 </Button>
               </Link>
             </div>

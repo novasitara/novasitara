@@ -3,12 +3,15 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../common/Button';
+import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { MobileNav } from './MobileNav';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,12 +32,12 @@ export const Navbar: React.FC = () => {
   }, [location.pathname]);
 
   const navLinks = [
-    { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' },
-    { label: 'Services', path: '/services' },
-    { label: 'Expertise', path: '/expertise' },
-    { label: 'Careers', path: '/careers' },
-    { label: 'Contact', path: '/contact' },
+    { label: t.nav.home, path: '/' },
+    { label: t.nav.about, path: '/about' },
+    { label: t.nav.services, path: '/services' },
+    { label: t.nav.expertise, path: '/expertise' },
+    { label: t.nav.careers, path: '/careers' },
+    { label: t.nav.contact, path: '/contact' },
   ];
 
   return (
@@ -70,7 +73,7 @@ export const Navbar: React.FC = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '2.5rem',
+                gap: '2.25rem',
                 listStyle: 'none',
               }}
             >
@@ -96,30 +99,35 @@ export const Navbar: React.FC = () => {
             </ul>
           </nav>
 
-          {/* Desktop CTA Button */}
-          <div className="desktop-cta" style={{ display: 'flex', alignItems: 'center' }}>
+          {/* Desktop CTA Button & Language Switcher */}
+          <div className="desktop-cta" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+            <LanguageSwitcher />
+
             <Link to="/contact">
               <Button variant="secondary" size="md">
-                Talk to Us
+                {t.nav.talkToUs}
               </Button>
             </Link>
           </div>
 
-          {/* Mobile Hamburger Trigger */}
-          <button
-            className="mobile-trigger"
-            onClick={() => setMobileMenuOpen(true)}
-            style={{
-              padding: '0.5rem',
-              color: '#000000',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-            aria-label="Open Mobile Menu"
-          >
-            <Menu size={26} />
-          </button>
+          {/* Mobile Right Controls: Language Switcher & Hamburger */}
+          <div className="mobile-header-right" style={{ display: 'none', alignItems: 'center', gap: '0.75rem' }}>
+            <LanguageSwitcher compact />
+            <button
+              className="mobile-trigger"
+              onClick={() => setMobileMenuOpen(true)}
+              style={{
+                padding: '0.5rem',
+                color: '#000000',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              aria-label="Open Mobile Menu"
+            >
+              <Menu size={26} />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -132,9 +140,6 @@ export const Navbar: React.FC = () => {
         }
         .desktop-cta {
           display: flex;
-        }
-        .mobile-trigger {
-          display: none;
         }
         .nav-link-editorial::after {
           content: '';
@@ -157,7 +162,7 @@ export const Navbar: React.FC = () => {
           .desktop-cta {
             display: none !important;
           }
-          .mobile-trigger {
+          .mobile-header-right {
             display: flex !important;
           }
         }

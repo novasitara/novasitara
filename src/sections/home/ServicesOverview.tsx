@@ -175,7 +175,7 @@ export const ServicesOverview: React.FC = () => {
           </p>
           <Link to="/services">
             <Button variant="secondary" size="lg" rightIcon={<ArrowRight size={18} />}>
-              View All 8 Services Directory
+              View All 9 Services Directory
             </Button>
           </Link>
         </div>

@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const ProjectEnvironments: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,19 +26,22 @@ export const ProjectEnvironments: React.FC = () => {
 
   const categories = [
     {
-      title: 'CONSULTING FIRMS',
-      subtitle: 'Implementation & Strategic Sourcing',
-      desc: 'Implementation partners and consulting organizations seeking specialized project expertise.',
+      title: t.customerCards.card1Title,
+      subtitle: t.customerCards.card1Subtitle,
+      desc: t.customerCards.card1Desc,
+      cta: t.customerCards.card1Cta,
     },
     {
-      title: 'IMPLEMENTATION PARTNERS',
-      subtitle: 'Technical & Functional Roles',
-      desc: 'Qualified professionals for specific SAP and Vistex roles and project-specific requirements.',
+      title: t.customerCards.card2Title,
+      subtitle: t.customerCards.card2Subtitle,
+      desc: t.customerCards.card2Desc,
+      cta: t.customerCards.card2Cta,
     },
     {
-      title: 'ENTERPRISE CLIENTS',
-      subtitle: 'Direct Application & Project Support',
-      desc: 'Experienced consultants for implementation, enhancement, migration and application support requirements.',
+      title: t.customerCards.card3Title,
+      subtitle: t.customerCards.card3Subtitle,
+      desc: t.customerCards.card3Desc,
+      cta: t.customerCards.card3Cta,
     },
   ];
 
@@ -55,24 +61,18 @@ export const ProjectEnvironments: React.FC = () => {
         {/* Section Header */}
         <div style={{ maxWidth: '720px', marginBottom: '4rem' }}>
           <div className="eyebrow" style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 400ms ease' }}>
-            WHO WE SUPPORT
+            {t.customerCards.eyebrow}
           </div>
           <h2 style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', color: '#000000', lineHeight: 1.12, letterSpacing: '-0.03em' }}>
             <span className="text-mask-wrapper">
               <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`}>
-                Built for Different Project
-              </span>
-            </span>
-            <br />
-            <span className="text-mask-wrapper">
-              <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`} style={{ color: '#864EA8', transitionDelay: '150ms' }}>
-                Needs.
+                {t.customerCards.title}
               </span>
             </span>
           </h2>
         </div>
 
-        {/* Visual Information Architecture Pathway (PROJECT NEED -> NOVA SITARA -> SPECIALIZED EXPERTISE -> ENGAGEMENT) */}
+        {/* Visual Information Architecture Pathway */}
         <div
           style={{
             display: 'flex',
@@ -143,9 +143,10 @@ export const ProjectEnvironments: React.FC = () => {
               </div>
 
               <div style={{ paddingTop: '1.25rem', borderTop: '1px solid #F0EDF5', marginTop: '1.5rem' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#864EA8' }}>
-                  Specialized Engagement →
-                </span>
+                <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.875rem', fontWeight: 700, color: '#864EA8' }}>
+                  <span>{cat.cta}</span>
+                  <span>→</span>
+                </Link>
               </div>
             </div>
           ))}

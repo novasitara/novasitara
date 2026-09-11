@@ -37,7 +37,7 @@ export const ExpertisePage: React.FC = () => {
           <div className="container">
             <div style={{ maxWidth: '820px' }}>
               <div className="eyebrow">Technical Mastery</div>
-              <h1 style={{ marginBottom: '1.25rem', color: 'var(--color-text-heading)', fontSize: 'clamp(1.85rem, 5vw, 3.5rem)', wordBreak: 'break-word' }}>
+              <h1 style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em', marginBottom: '1.25rem', color: 'var(--color-text-heading)', wordBreak: 'normal', overflowWrap: 'break-word' }}>
                 Deep Domain Specialization <br className="desktop-br-only" />
                 <span style={{ color: 'var(--color-primary)' }}>Across Core SAP & Vistex Ecosystems.</span>
               </h1>

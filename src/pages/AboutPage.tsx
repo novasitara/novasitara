@@ -46,7 +46,7 @@ export const AboutPage: React.FC = () => {
           <div className="container">
             <div style={{ maxWidth: '800px' }}>
               <div className="eyebrow">About Nova Sitara</div>
-              <h1 style={{ marginBottom: '1.25rem', color: 'var(--color-text-heading)', fontSize: 'clamp(1.85rem, 5vw, 3.5rem)', wordBreak: 'break-word' }}>
+              <h1 style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em', marginBottom: '1.25rem', color: 'var(--color-text-heading)', wordBreak: 'normal', overflowWrap: 'break-word' }}>
                 Specialized SAP & Vistex Consulting <br className="desktop-br-only" />
                 <span style={{ color: 'var(--color-primary)' }}>& Technology Staffing.</span>
               </h1>
@@ -69,7 +69,7 @@ export const AboutPage: React.FC = () => {
               }}
             >
               <div style={{ gridColumn: 'span 12' }} className="about-hero-left">
-                <h2 style={{ marginBottom: '1.25rem', fontSize: 'clamp(1.6rem, 4vw, 2.5rem)' }}>Our Business Positioning</h2>
+                <h2 style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em', marginBottom: '1.25rem' }}>Our Business Positioning</h2>
                 <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--color-text-body)', marginBottom: '1.25rem' }}>
                   Enterprise SAP implementations and specialized solution enhancements require precise domain expertise. Nova Sitara has a particular focus on the niche Vistex market, helping consulting firms, implementation partners, and end clients access qualified professionals for specific project roles.
                 </p>
@@ -145,7 +145,7 @@ export const AboutPage: React.FC = () => {
           <div className="container">
             <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 3rem auto' }}>
               <div className="eyebrow">Our Principles</div>
-              <h2 style={{ fontSize: 'clamp(1.75rem, 4.5vw, 3rem)' }}>How We Partner With You</h2>
+              <h2 style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em' }}>How We Partner With You</h2>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', marginTop: '0.75rem' }}>
                 Delivering reliable SAP and Vistex resource alignment for project success.
               </p>

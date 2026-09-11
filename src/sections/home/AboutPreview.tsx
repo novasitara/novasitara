@@ -80,14 +80,17 @@ export const AboutPreview: React.FC = () => {
             {/* Main Headline (Exact 3 Lines: Line 1 = 'The Right Expertise', Line 2 = 'for Complex SAP', Line 3 = 'Environments.') */}
             <h2
               style={{
-                fontSize: 'clamp(1.8rem, 5.5vw, 3.35rem)',
-                lineHeight: 1.1,
-                letterSpacing: '-0.035em',
+                fontFamily: 'var(--font-sans)',
+                fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)',
                 fontWeight: 800,
+                lineHeight: 1.15,
+                letterSpacing: '-0.03em',
                 marginBottom: '1.25rem',
                 color: '#080808',
                 textAlign: 'left',
                 maxWidth: '100%',
+                wordBreak: 'normal',
+                overflowWrap: 'break-word',
               }}
             >
               <span

@@ -75,13 +75,15 @@ export const Hero: React.FC = () => {
             {/* Headline */}
             <h1
               style={{
-                marginBottom: '1.25rem',
-                color: '#000000',
-                lineHeight: 1.12,
-                fontSize: 'clamp(2.1rem, 5vw, 4rem)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)',
                 fontWeight: 800,
-                letterSpacing: '-0.035em',
-                wordBreak: 'break-word',
+                lineHeight: 1.15,
+                letterSpacing: '-0.03em',
+                color: '#000000',
+                marginBottom: '1.25rem',
+                wordBreak: 'normal',
+                overflowWrap: 'break-word',
               }}
             >
               <span className="text-mask-wrapper">

@@ -88,13 +88,15 @@ export const CTASection: React.FC<CTASectionProps> = ({
           {/* Large White Heading */}
           <h2
             style={{
-              fontSize: 'clamp(1.85rem, 5vw, 4rem)',
+              fontFamily: 'var(--font-sans)',
+              fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)',
               fontWeight: 800,
               color: '#FFFFFF',
-              lineHeight: 1.12,
-              letterSpacing: '-0.035em',
-              marginBottom: '1.5rem',
-              wordBreak: 'break-word',
+              lineHeight: 1.15,
+              letterSpacing: '-0.03em',
+              marginBottom: '1.25rem',
+              wordBreak: 'normal',
+              overflowWrap: 'break-word',
             }}
           >
             <span className="text-mask-wrapper">
@@ -103,14 +105,11 @@ export const CTASection: React.FC<CTASectionProps> = ({
               </span>
             </span>
             {!title && (
-              <>
-                <br className="desktop-br-only" />
-                <span className="text-mask-wrapper">
-                  <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '300ms' }}>
-                    that needs the right expertise?
-                  </span>
+              <span className="text-mask-wrapper">
+                <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '300ms' }}>
+                  that needs the right expertise?
                 </span>
-              </>
+              </span>
             )}
           </h2>
 

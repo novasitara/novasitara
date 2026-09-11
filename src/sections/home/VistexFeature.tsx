@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, Sparkles } from 'lucide-react';
 import { Button } from '../../components/common/Button';
 import { useLanguage } from '../../context/LanguageContext';
 
 export const VistexFeature: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [imgError, setImgError] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const { t, language } = useLanguage();
 
@@ -51,63 +52,61 @@ export const VistexFeature: React.FC = () => {
             alignItems: 'center',
           }}
         >
-          {/* LEFT: Large "VISTEX" Header & Custom Technical Architecture SVG Illustration */}
+          {/* LEFT: Clean Branded Vistex Consulting Expertise AI Graphic */}
           <div style={{ gridColumn: 'span 12' }} className="vistex-feat-left">
             <div
               style={{
-                padding: 'clamp(2.25rem, 4vw, 3.5rem)',
                 borderRadius: '24px',
-                backgroundColor: '#864EA8',
-                backgroundImage: 'linear-gradient(140deg, #864EA8 0%, #5B21B6 100%)',
-                color: '#FFFFFF',
-                boxShadow: '0 16px 40px rgba(134, 78, 168, 0.22)',
-                position: 'relative',
                 overflow: 'hidden',
+                boxShadow: '0 16px 40px rgba(134, 78, 168, 0.22)',
+                backgroundColor: '#864EA8',
+                backgroundImage: 'linear-gradient(145deg, #864EA8 0%, #5B21B6 100%)',
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
                 transition: 'opacity 600ms ease 100ms, transform 600ms ease 100ms',
+                position: 'relative',
+                minHeight: '320px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              {/* Giant Background Watermark */}
-              <span
-                style={{
-                  fontSize: 'clamp(5rem, 12vw, 9rem)',
-                  fontWeight: 900,
-                  color: 'rgba(255, 255, 255, 0.08)',
-                  position: 'absolute',
-                  top: '-15%',
-                  right: '-10%',
-                  lineHeight: 1,
-                  userSelect: 'none',
-                  pointerEvents: 'none',
-                }}
-              >
-                VISTEX
-              </span>
-
-              {/* Technical Architecture Line Diagram */}
-              <div style={{ width: '100%', height: '220px', marginBottom: '1.5rem', position: 'relative', zIndex: 2 }}>
-                <svg viewBox="0 0 360 220" fill="none" style={{ width: '100%', height: '100%' }}>
-                  <path d="M 40 110 L 180 30 L 320 110 L 180 190 Z" stroke="#FFFFFF" strokeWidth="1.5" strokeOpacity="0.4" />
-                  <path d="M 80 110 L 180 55 L 280 110 L 180 165 Z" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="4 4" strokeOpacity="0.7" />
-
-                  {/* Connected Core Cuboid */}
-                  <path d="M 140 100 L 180 80 L 220 100 L 180 120 Z" fill="#FFFFFF" opacity="0.9" />
-                  <path d="M 140 100 L 180 120 L 180 140 L 140 120 Z" fill="rgba(255,255,255,0.7)" />
-                  <path d="M 180 120 L 220 100 L 220 120 L 180 140 Z" fill="rgba(255,255,255,0.5)" />
-
-                  <circle cx="180" cy="80" r="5" fill="#FFFFFF" className="animate-node-pulse" />
-                </svg>
-              </div>
-
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <span style={{ fontSize: '0.825rem', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.8)' }}>
-                  {t.vistexFeature.badge}
-                </span>
-                <h3 style={{ fontSize: 'clamp(1.75rem, 3.8vw, 2.35rem)', fontWeight: 800, color: '#FFFFFF', margin: '0.25rem 0 0 0', wordBreak: 'break-word', lineHeight: 1.15 }}>
-                  {t.vistexFeature.cardTitle}
-                </h3>
-              </div>
+              {!imgError ? (
+                <img
+                  src="/images/vistex-feature.png"
+                  alt="Vistex Consulting Expertise"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    display: 'block',
+                    objectFit: 'cover',
+                  }}
+                  onError={() => setImgError(true)}
+                />
+              ) : (
+                /* High-fidelity Branded Fallback if image path is not cached */
+                <div
+                  style={{
+                    padding: 'clamp(2.5rem, 4.5vw, 3.75rem)',
+                    color: '#FFFFFF',
+                    width: '100%',
+                    textAlign: 'left',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                    <Sparkles size={18} color="#FFFFFF" />
+                    <span style={{ fontSize: '0.825rem', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.85)' }}>
+                      {t.vistexFeature.badge}
+                    </span>
+                  </div>
+                  <h3 style={{ fontSize: 'clamp(1.75rem, 3.8vw, 2.35rem)', fontWeight: 800, color: '#FFFFFF', margin: 0, overflowWrap: 'break-word', wordBreak: 'normal', lineHeight: 1.15 }}>
+                    {t.vistexFeature.cardTitle}
+                  </h3>
+                  <p style={{ marginTop: '1rem', color: 'rgba(255,255,255,0.85)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                    Specialized SAP & Vistex Solutions, Incentive Management & Strategic Consulting.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -117,11 +116,32 @@ export const VistexFeature: React.FC = () => {
               NICHE FOCUS
             </div>
 
-            <h2 style={{ fontSize: 'clamp(2.25rem, 4vw, 3.25rem)', color: '#000000', lineHeight: 1.15, marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>
+            <h2
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)',
+                fontWeight: 800,
+                lineHeight: 1.15,
+                letterSpacing: '-0.03em',
+                color: '#000000',
+                marginBottom: '1.25rem',
+                overflowWrap: 'break-word',
+                wordBreak: 'normal',
+              }}
+            >
               {t.vistexFeature.headline}
             </h2>
 
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.65, color: '#22222A', marginBottom: '2rem' }}>
+            <p
+              style={{
+                fontSize: '1.05rem',
+                lineHeight: 1.65,
+                color: '#22222A',
+                marginBottom: '2rem',
+                overflowWrap: 'break-word',
+                wordBreak: 'normal',
+              }}
+            >
               {t.vistexFeature.description}
             </p>
 

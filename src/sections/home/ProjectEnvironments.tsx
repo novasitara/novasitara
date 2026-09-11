@@ -63,7 +63,19 @@ export const ProjectEnvironments: React.FC = () => {
           <div className="eyebrow" style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 400ms ease' }}>
             {t.customerCards.eyebrow}
           </div>
-          <h2 style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', color: '#000000', lineHeight: 1.12, letterSpacing: '-0.03em' }}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)',
+              fontWeight: 800,
+              lineHeight: 1.15,
+              letterSpacing: '-0.03em',
+              color: '#000000',
+              marginBottom: '0.85rem',
+              wordBreak: 'normal',
+              overflowWrap: 'break-word',
+            }}
+          >
             <span className="text-mask-wrapper">
               <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`}>
                 {t.customerCards.title}

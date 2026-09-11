@@ -42,13 +42,24 @@ export const ExpertiseDiagram: React.FC = () => {
           <div className="eyebrow" style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 400ms ease' }}>
             SPECIALIZED CAPABILITIES
           </div>
-          <h2 style={{ fontSize: 'clamp(1.85rem, 4.5vw, 3.5rem)', color: '#000000', lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)',
+              fontWeight: 800,
+              lineHeight: 1.15,
+              letterSpacing: '-0.03em',
+              color: '#000000',
+              marginBottom: '0.85rem',
+              wordBreak: 'normal',
+              overflowWrap: 'break-word',
+            }}
+          >
             <span className="text-mask-wrapper">
               <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`}>
                 Specialized Where Expertise
               </span>
             </span>
-            <br />
             <span className="text-mask-wrapper">
               <span className={`text-mask-line ${isVisible ? 'is-visible' : ''}`} style={{ color: '#864EA8', transitionDelay: '150ms' }}>
                 Matters Most.

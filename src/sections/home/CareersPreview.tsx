@@ -62,11 +62,15 @@ export const CareersPreview: React.FC = () => {
 
             <h2
               style={{
-                fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)',
+                fontWeight: 800,
+                lineHeight: 1.15,
+                letterSpacing: '-0.03em',
                 color: '#000000',
-                lineHeight: 1.12,
-                letterSpacing: '-0.035em',
                 marginBottom: '1.25rem',
+                wordBreak: 'normal',
+                overflowWrap: 'break-word',
               }}
             >
               Bring Your Expertise to the Next Project.

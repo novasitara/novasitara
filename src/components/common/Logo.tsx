@@ -25,51 +25,40 @@ export const Logo: React.FC<LogoProps> = ({
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '0.65rem',
+        gap: '0.75rem',
         textDecoration: 'none',
         userSelect: 'none',
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
       }}
     >
       <img
         src="/images/logo.jpeg"
-        alt="Nova Sitara Private Limited Logo"
+        alt="Nova Sitara Logo"
         style={{
           height: `${height}px`,
           width: 'auto',
           display: 'block',
           objectFit: 'contain',
           borderRadius: '4px',
+          flexShrink: 0,
         }}
       />
 
       {showWordmark && (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <span
-            style={{
-              fontFamily: "'Space Grotesk', 'Plus Jakarta Sans', sans-serif",
-              fontWeight: 800,
-              fontSize: '1.2rem',
-              letterSpacing: '-0.02em',
-              color: textColor,
-              lineHeight: 1,
-            }}
-          >
-            NOVA SITARA
-          </span>
-          <span
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: 600,
-              fontSize: '0.625rem',
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: isDarkBg ? 'rgba(255,255,255,0.7)' : 'var(--color-primary)',
-              marginTop: '0.15rem',
-            }}
-          >
-            Private Limited
-          </span>
-        </div>
+        <span
+          style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 700,
+            fontSize: 'clamp(1.15rem, 2.2vw, 1.4rem)',
+            letterSpacing: '-0.02em',
+            color: textColor,
+            lineHeight: 1,
+            display: 'inline-block',
+          }}
+        >
+          Nova Sitara
+        </span>
       )}
     </Link>
   );

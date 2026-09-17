@@ -299,7 +299,7 @@ export const MarketFocusSlider: React.FC = () => {
               ))}
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', maxWidth: '280px' }}>
+            <div className="market-slide-cta-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', maxWidth: '280px' }}>
               <Link
                 to={currentSlide.actionLink}
                 style={{
@@ -418,6 +418,11 @@ export const MarketFocusSlider: React.FC = () => {
           }
           .market-slider-mobile-header {
             display: flex !important;
+          }
+        }
+        @media (max-width: 576px) {
+          .market-slide-cta-wrapper {
+            max-width: 100% !important;
           }
         }
         @keyframes progress5s {

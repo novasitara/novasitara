@@ -36,8 +36,8 @@ export const VistexFeature: React.FC = () => {
       ref={sectionRef}
       style={{
         backgroundColor: '#FFFFFF',
-        paddingTop: 'clamp(5rem, 8vw, 7rem)',
-        paddingBottom: 'clamp(5rem, 8vw, 7rem)',
+        paddingTop: 'clamp(3.5rem, 6vw, 6rem)',
+        paddingBottom: 'clamp(3.5rem, 6vw, 6rem)',
         borderBottom: '1px solid var(--color-border)',
         position: 'relative',
         overflow: 'hidden',
@@ -48,13 +48,14 @@ export const VistexFeature: React.FC = () => {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '3.5rem',
+            gap: 'clamp(2rem, 4vw, 3.5rem)',
             alignItems: 'center',
           }}
         >
-          {/* LEFT: Clean Branded Vistex Consulting Expertise AI Graphic */}
+          {/* LEFT: Clean Branded Vistex Consulting Expertise Graphic */}
           <div style={{ gridColumn: 'span 12' }} className="vistex-feat-left">
             <div
+              className="vistex-feat-box"
               style={{
                 borderRadius: '24px',
                 overflow: 'hidden',
@@ -65,10 +66,10 @@ export const VistexFeature: React.FC = () => {
                 transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
                 transition: 'opacity 600ms ease 100ms, transform 600ms ease 100ms',
                 position: 'relative',
-                minHeight: '320px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                width: '100%',
               }}
             >
               {!imgError ? (
@@ -87,7 +88,7 @@ export const VistexFeature: React.FC = () => {
                 /* High-fidelity Branded Fallback if image path is not cached */
                 <div
                   style={{
-                    padding: 'clamp(2.5rem, 4.5vw, 3.75rem)',
+                    padding: 'clamp(1.75rem, 4.5vw, 3.75rem)',
                     color: '#FFFFFF',
                     width: '100%',
                     textAlign: 'left',
@@ -99,7 +100,7 @@ export const VistexFeature: React.FC = () => {
                       {t.vistexFeature.badge}
                     </span>
                   </div>
-                  <h3 style={{ fontSize: 'clamp(1.75rem, 3.8vw, 2.35rem)', fontWeight: 800, color: '#FFFFFF', margin: 0, overflowWrap: 'break-word', wordBreak: 'normal', lineHeight: 1.15 }}>
+                  <h3 style={{ fontSize: 'clamp(1.5rem, 3.8vw, 2.35rem)', fontWeight: 800, color: '#FFFFFF', margin: 0, overflowWrap: 'break-word', wordBreak: 'normal', lineHeight: 1.15 }}>
                     {t.vistexFeature.cardTitle}
                   </h3>
                   <p style={{ marginTop: '1rem', color: 'rgba(255,255,255,0.85)', fontSize: '0.95rem', lineHeight: 1.6 }}>
@@ -134,10 +135,10 @@ export const VistexFeature: React.FC = () => {
 
             <p
               style={{
-                fontSize: '1.05rem',
+                fontSize: 'clamp(0.975rem, 1.8vw, 1.05rem)',
                 lineHeight: 1.65,
                 color: '#22222A',
-                marginBottom: '2rem',
+                marginBottom: '1.75rem',
                 overflowWrap: 'break-word',
                 wordBreak: 'normal',
               }}
@@ -146,7 +147,7 @@ export const VistexFeature: React.FC = () => {
             </p>
 
             {/* Concise Capability Badges */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2.25rem' }}>
               {capabilities.map((cap, idx) => (
                 <div
                   key={cap}
@@ -159,15 +160,15 @@ export const VistexFeature: React.FC = () => {
                     transition: `opacity 400ms ease ${300 + idx * 100}ms, transform 400ms ease ${300 + idx * 100}ms`,
                   }}
                 >
-                  <CheckCircle size={18} color="#864EA8" />
-                  <span style={{ fontSize: '1rem', fontWeight: 700, color: '#111116' }}>{cap}</span>
+                  <CheckCircle size={18} color="#864EA8" style={{ flexShrink: 0 }} />
+                  <span style={{ fontSize: '1rem', fontWeight: 700, color: '#111116', overflowWrap: 'break-word', wordBreak: 'normal' }}>{cap}</span>
                 </div>
               ))}
             </div>
 
-            <div>
-              <Link to="/expertise#vistex">
-                <Button variant="primary" size="lg" rightIcon={<ArrowRight size={18} />}>
+            <div className="vistex-cta-wrapper">
+              <Link to="/expertise#vistex" className="vistex-cta-link" style={{ display: 'inline-block', textDecoration: 'none' }}>
+                <Button variant="primary" size="lg" rightIcon={<ArrowRight size={18} />} style={{ width: '100%' }}>
                   {t.vistexFeature.cta}
                 </Button>
               </Link>
@@ -177,12 +178,23 @@ export const VistexFeature: React.FC = () => {
       </div>
 
       <style>{`
+        .vistex-cta-link {
+          width: auto;
+        }
         @media (min-width: 992px) {
           .vistex-feat-left {
             grid-column: span 5 !important;
           }
           .vistex-feat-right {
             grid-column: span 7 !important;
+          }
+        }
+        @media (max-width: 767px) {
+          .vistex-cta-wrapper {
+            width: 100% !important;
+          }
+          .vistex-cta-link {
+            width: 100% !important;
           }
         }
       `}</style>

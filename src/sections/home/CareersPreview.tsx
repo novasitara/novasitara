@@ -38,8 +38,8 @@ export const CareersPreview: React.FC = () => {
       ref={sectionRef}
       style={{
         backgroundColor: '#FFFFFF',
-        paddingTop: 'clamp(5rem, 8vw, 7rem)',
-        paddingBottom: 'clamp(5rem, 8vw, 7rem)',
+        paddingTop: 'clamp(3.5rem, 6vw, 6rem)',
+        paddingBottom: 'clamp(3.5rem, 6vw, 6rem)',
         borderBottom: '1px solid var(--color-border)',
         position: 'relative',
         overflow: 'hidden',
@@ -50,7 +50,7 @@ export const CareersPreview: React.FC = () => {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '3.5rem',
+            gap: 'clamp(2rem, 4vw, 3.5rem)',
             alignItems: 'flex-start',
           }}
         >
@@ -76,15 +76,17 @@ export const CareersPreview: React.FC = () => {
               Bring Your Expertise to the Next Project.
             </h2>
 
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.65, color: 'var(--color-text-body)', marginBottom: '2rem' }}>
+            <p style={{ fontSize: 'clamp(0.975rem, 1.8vw, 1.05rem)', lineHeight: 1.65, color: 'var(--color-text-body)', marginBottom: '2rem', wordBreak: 'normal', overflowWrap: 'break-word' }}>
               Explore opportunities with Nova Sitara and contribute your expertise across SAP and Vistex project environments.
             </p>
 
-            <Link to="/careers">
-              <Button variant="secondary" size="lg" rightIcon={<ArrowRight size={18} />}>
-                View All Opportunities
-              </Button>
-            </Link>
+            <div className="careers-cta-wrapper">
+              <Link to="/careers" className="careers-cta-link" style={{ display: 'inline-block', textDecoration: 'none' }}>
+                <Button variant="secondary" size="lg" rightIcon={<ArrowRight size={18} />} style={{ width: '100%' }}>
+                  View All Opportunities
+                </Button>
+              </Link>
+            </div>
           </div>
 
           {/* RIGHT: Clean Editorial Roles List */}
@@ -100,11 +102,12 @@ export const CareersPreview: React.FC = () => {
                     onMouseLeave={() => setHoveredIdx(null)}
                     style={{
                       position: 'relative',
-                      padding: '1.5rem 0 1.5rem 1.25rem',
+                      padding: '1.25rem 0.5rem 1.25rem 1rem',
                       borderBottom: '1px solid var(--color-border)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
+                      gap: '0.75rem',
                       cursor: 'pointer',
                       transition: 'all 200ms ease',
                       backgroundColor: isHovered ? '#FAFAFA' : 'transparent',
@@ -128,21 +131,23 @@ export const CareersPreview: React.FC = () => {
                       }}
                     />
 
-                    <div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
                       <h3
                         style={{
-                          fontSize: '1.25rem',
+                          fontSize: 'clamp(1.1rem, 2.2vw, 1.25rem)',
                           fontWeight: 700,
                           color: isHovered ? '#864EA8' : '#000000',
                           marginBottom: '0.25rem',
                           transition: 'transform 200ms ease, color 150ms ease',
                           transform: isHovered ? 'translateX(6px)' : 'translateX(0)',
                           margin: 0,
+                          wordBreak: 'normal',
+                          overflowWrap: 'break-word',
                         }}
                       >
                         {item.role}
                       </h3>
-                      <span style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', fontWeight: 500 }}>
+                      <span style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', fontWeight: 500, display: 'block', wordBreak: 'normal', overflowWrap: 'break-word' }}>
                         {item.spec}
                       </span>
                     </div>
@@ -158,6 +163,7 @@ export const CareersPreview: React.FC = () => {
                         backgroundColor: isHovered ? '#864EA8' : 'transparent',
                         color: isHovered ? '#FFFFFF' : '#000000',
                         transition: 'all 200ms ease',
+                        flexShrink: 0,
                       }}
                     >
                       <ArrowUpRight size={18} />
@@ -171,12 +177,24 @@ export const CareersPreview: React.FC = () => {
       </div>
 
       <style>{`
+        .careers-cta-link {
+          width: auto;
+        }
         @media (min-width: 992px) {
           .careers-left-col {
             grid-column: span 5 !important;
           }
           .careers-right-col {
             grid-column: span 7 !important;
+          }
+        }
+        @media (max-width: 767px) {
+          .careers-cta-wrapper {
+            width: 100% !important;
+            margin-bottom: 2rem;
+          }
+          .careers-cta-link {
+            width: 100% !important;
           }
         }
       `}</style>

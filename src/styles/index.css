@@ -175,12 +175,23 @@ img, svg, video {
   margin: var(--space-element) 0;
 }
 
-/* Responsive Grid Form Helpers & Desktop BR hiding */
+/* Responsive Grid Form Helpers & Global Mobile Responsiveness */
+@media (max-width: 768px) {
+  .container, .container-narrow {
+    padding-left: clamp(1rem, 4vw, 1.5rem);
+    padding-right: clamp(1rem, 4vw, 1.5rem);
+  }
+}
+
 @media (max-width: 576px) {
   .form-grid-2col {
     grid-template-columns: 1fr !important;
   }
   .desktop-br-only {
     display: none !important;
+  }
+  /* Fluid mobile button wrapping */
+  .btn-responsive-mobile {
+    width: 100% !important;
   }
 }

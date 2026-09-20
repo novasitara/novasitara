@@ -12,8 +12,8 @@ interface FileUploadProps {
 export const FileUpload: React.FC<FileUploadProps> = ({
   onFileSelect,
   selectedFile,
-  allowedTypes = ['.pdf'],
-  maxSizeMB = 0.5,
+  allowedTypes = ['.pdf', '.doc', '.docx'],
+  maxSizeMB = 5,
   error,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -144,7 +144,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
             Click to upload or drag & drop resume
           </p>
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
-            PDF only — Max 500KB
+            Accepted formats: {allowedTypes.join(', ')} (Max {maxSizeMB}MB)
           </p>
         </div>
       ) : (

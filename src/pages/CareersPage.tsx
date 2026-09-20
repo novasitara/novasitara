@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SEO } from '../components/common/SEO';
 import { CTASection } from '../sections/common/CTASection';
 import { JobCard } from '../components/ui/JobCard';
-import { jobsData } from '../data/jobs';
-import { Search, Filter, Briefcase } from 'lucide-react';
+import { api } from '../services/api';
+import { JobItem } from '../data/jobs';
+import { Search, Filter, Briefcase, Loader2 } from 'lucide-react';
 
 export const CareersPage: React.FC = () => {
+  const [jobs, setJobs] = useState<JobItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDept, setSelectedDept] = useState('all');
 
-  const filteredJobs = jobsData.filter((job) => {
+  useEffect(() => {
+    api.getJobs().then((res) => {
+      if (res.success && res.data) setJobs(res.data);
+      setLoading(false);
+    });
+  }, []);
+
+  const filteredJobs = jobs.filter((job) => {
     const matchesSearch =
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.overview.toLowerCase().includes(searchTerm.toLowerCase());
@@ -54,68 +64,30 @@ export const CareersPage: React.FC = () => {
             <div
               className="careers-filter-bar"
               style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '1rem',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: '2.5rem',
-                padding: '1.25rem',
-                borderRadius: 'var(--radius-lg)',
-                backgroundColor: 'var(--color-bg-subtle)',
+                display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center',
+                justifyContent: 'space-between', marginBottom: '2.5rem', padding: '1.25rem',
+                borderRadius: 'var(--radius-lg)', backgroundColor: 'var(--color-bg-subtle)',
                 border: '1px solid var(--color-border)',
               }}
             >
-              {/* Search Box */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.65rem',
-                  backgroundColor: 'var(--color-bg-light)',
-                  padding: '0.65rem 1rem',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--color-border)',
-                  flex: 1,
-                  minWidth: '200px',
-                  width: '100%',
-                }}
-              >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', backgroundColor: 'var(--color-bg-light)', padding: '0.65rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', flex: 1, minWidth: '200px', width: '100%' }}>
                 <Search size={18} color="var(--color-text-muted)" />
                 <input
                   type="text"
                   placeholder="Search by job title or keyword..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{
-                    border: 'none',
-                    outline: 'none',
-                    width: '100%',
-                    fontSize: '0.925rem',
-                    fontFamily: 'inherit',
-                    backgroundColor: 'transparent',
-                  }}
+                  style={{ border: 'none', outline: 'none', width: '100%', fontSize: '0.925rem', fontFamily: 'inherit', backgroundColor: 'transparent' }}
                   aria-label="Search Job Listings"
                 />
               </div>
 
-              {/* Department Filter */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', maxWidth: '280px' }}>
                 <Filter size={16} color="var(--color-text-muted)" />
                 <select
                   value={selectedDept}
                   onChange={(e) => setSelectedDept(e.target.value)}
-                  style={{
-                    padding: '0.65rem 1rem',
-                    borderRadius: 'var(--radius-md)',
-                    border: '1px solid var(--color-border)',
-                    backgroundColor: 'var(--color-bg-light)',
-                    fontSize: '0.9rem',
-                    fontFamily: 'inherit',
-                    cursor: 'pointer',
-                    color: 'var(--color-text-heading)',
-                    width: '100%',
-                  }}
+                  style={{ padding: '0.65rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-light)', fontSize: '0.9rem', fontFamily: 'inherit', cursor: 'pointer', color: 'var(--color-text-heading)', width: '100%' }}
                   aria-label="Filter by Department"
                 >
                   <option value="all">All Departments</option>
@@ -128,34 +100,24 @@ export const CareersPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Jobs Grid */}
-            {filteredJobs.length > 0 ? (
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                  gap: '1.5rem',
-                }}
-              >
+            {/* Loading */}
+            {loading ? (
+              <div style={{ padding: '4rem', textAlign: 'center' }}>
+                <Loader2 size={32} color="var(--color-primary)" style={{ margin: '0 auto 1rem', animation: 'spin 1s linear infinite' }} />
+                <p style={{ color: 'var(--color-text-muted)' }}>Loading positions...</p>
+                <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+              </div>
+            ) : filteredJobs.length > 0 ? (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
                 {filteredJobs.map((job) => (
                   <JobCard key={job.id} job={job} />
                 ))}
               </div>
             ) : (
-              <div
-                style={{
-                  padding: '4rem 1.5rem',
-                  textAlign: 'center',
-                  backgroundColor: 'var(--color-bg-subtle)',
-                  borderRadius: 'var(--radius-xl)',
-                  border: '1px dashed var(--color-border)',
-                }}
-              >
+              <div style={{ padding: '4rem 1.5rem', textAlign: 'center', backgroundColor: 'var(--color-bg-subtle)', borderRadius: 'var(--radius-xl)', border: '1px dashed var(--color-border)' }}>
                 <Briefcase size={40} color="var(--color-text-muted)" style={{ margin: '0 auto 1rem auto' }} />
                 <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>No positions match your search</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>
-                  Try resetting your search query or department filter.
-                </p>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>Try resetting your search query or department filter.</p>
               </div>
             )}
           </div>
@@ -166,13 +128,8 @@ export const CareersPage: React.FC = () => {
 
       <style>{`
         @media (max-width: 576px) {
-          .desktop-br-only {
-            display: none !important;
-          }
-          .careers-filter-bar {
-            flex-direction: column !important;
-            align-items: stretch !important;
-          }
+          .desktop-br-only { display: none !important; }
+          .careers-filter-bar { flex-direction: column !important; align-items: stretch !important; }
         }
       `}</style>
     </>

@@ -12,7 +12,7 @@ export const Logo: React.FC<LogoProps> = ({
   variant = 'default',
   showWordmark = true,
   className = '',
-  height = 38,
+  height = 23,
 }) => {
   const isDarkBg = variant === 'dark';
   const textColor = isDarkBg ? '#FFFFFF' : '#000000';
@@ -25,25 +25,38 @@ export const Logo: React.FC<LogoProps> = ({
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '0.75rem',
+        gap: '6px',
         textDecoration: 'none',
         userSelect: 'none',
         whiteSpace: 'nowrap',
         flexShrink: 0,
       }}
     >
-      <img
-        src="/images/logo.jpeg"
-        alt="Nova Sitara Logo"
+      {/* 
+        Mathematical SVG ViewBox Crop:
+        Renders the exact official logo.jpeg asset without any pixel cuts or DPI scaling clipping.
+      */}
+      <svg
+        viewBox="240 280 570 340"
+        xmlns="http://www.w3.org/2000/svg"
         style={{
-          height: `${height}px`,
+          height: '20px',
           width: 'auto',
           display: 'block',
-          objectFit: 'contain',
-          borderRadius: '4px',
           flexShrink: 0,
         }}
-      />
+        role="img"
+        aria-label="Nova Sitara Logo"
+      >
+        <image
+          href="/images/logo.jpeg"
+          x="0"
+          y="0"
+          width="1024"
+          height="1024"
+          preserveAspectRatio="none"
+        />
+      </svg>
 
       {showWordmark && (
         <span
@@ -54,7 +67,8 @@ export const Logo: React.FC<LogoProps> = ({
             letterSpacing: '-0.02em',
             color: textColor,
             lineHeight: 1,
-            display: 'inline-block',
+            display: 'inline-flex',
+            alignItems: 'center',
           }}
         >
           Nova Sitara

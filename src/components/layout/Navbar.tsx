@@ -65,7 +65,7 @@ export const Navbar: React.FC = () => {
           }}
         >
           {/* Logo */}
-          <Logo height={40} />
+          <Logo />
 
           {/* Desktop Navigation */}
           <nav className="desktop-nav" aria-label="Main Navigation">

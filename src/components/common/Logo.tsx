@@ -37,7 +37,7 @@ export const Logo: React.FC<LogoProps> = ({
         Renders the exact official logo.jpeg asset without any pixel cuts or DPI scaling clipping.
       */}
       <svg
-        viewBox="240 280 570 340"
+        viewBox="240 280 570 340 "
         xmlns="http://www.w3.org/2000/svg"
         style={{
           height: '20px',

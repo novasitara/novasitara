@@ -6,12 +6,13 @@ import { Button } from '../common/Button';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { MobileNav } from './MobileNav';
 import { useLanguage } from '../../context/LanguageContext';
+import { useSiteLinks } from '../../lib/siteContent';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,14 +32,14 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const navLinks = [
+  const navLinks = useSiteLinks('navbar', [
     { label: t.nav.home, path: '/' },
     { label: t.nav.about, path: '/about' },
     { label: t.nav.services, path: '/services' },
     { label: t.nav.expertise, path: '/expertise' },
     { label: t.nav.careers, path: '/careers' },
     { label: t.nav.contact, path: '/contact' },
-  ];
+  ], language);
 
   return (
     <>
@@ -79,6 +80,17 @@ export const Navbar: React.FC = () => {
             >
               {navLinks.map((link) => (
                 <li key={link.path}>
+                  {link.external ? (
+                    <a
+                      href={link.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="nav-link-editorial"
+                      style={{ fontSize: '0.925rem', fontWeight: 500, color: '#000000', position: 'relative', padding: '0.4rem 0' }}
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
                   <NavLink
                     to={link.path}
                     end={link.path === '/'}
@@ -94,6 +106,7 @@ export const Navbar: React.FC = () => {
                   >
                     {link.label}
                   </NavLink>
+                  )}
                 </li>
               ))}
             </ul>

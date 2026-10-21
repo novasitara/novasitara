@@ -11,6 +11,24 @@ export interface JobItem {
   requirements: string[];
   preferredSkills: string[];
   benefits: string[];
+  de?: Partial<Pick<JobItem, 'title' | 'department' | 'overview' | 'responsibilities' | 'requirements' | 'preferredSkills' | 'benefits'>>;
+}
+
+/** Returns the job in German where a German value was entered in admin, else English. */
+export function localizeJob(job: JobItem, language: 'EN' | 'DE'): JobItem {
+  if (language !== 'DE' || !job.de) return job;
+  const d = job.de;
+  const list = (de?: string[], en?: string[]) => (de && de.length ? de : (en ?? []));
+  return {
+    ...job,
+    title: d.title || job.title,
+    department: d.department || job.department,
+    overview: d.overview || job.overview,
+    responsibilities: list(d.responsibilities, job.responsibilities),
+    requirements: list(d.requirements, job.requirements),
+    preferredSkills: list(d.preferredSkills, job.preferredSkills),
+    benefits: list(d.benefits, job.benefits),
+  };
 }
 
 export const jobsData: JobItem[] = [

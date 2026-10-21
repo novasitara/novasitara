@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle, Sparkles } from 'lucide-react';
 import { Button } from '../../components/common/Button';
 import { useLanguage } from '../../context/LanguageContext';
+import { useSiteImage } from '../../lib/siteContent';
 
 export const VistexFeature: React.FC = () => {
+  const vistexImage = useSiteImage('vistex-feature', '/images/vistex-feature.png');
   const [isVisible, setIsVisible] = useState(false);
   const [imgError, setImgError] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -74,7 +76,7 @@ export const VistexFeature: React.FC = () => {
             >
               {!imgError ? (
                 <img
-                  src="/images/vistex-feature.png"
+                  src={vistexImage}
                   alt="Vistex Consulting Expertise"
                   style={{
                     width: '100%',

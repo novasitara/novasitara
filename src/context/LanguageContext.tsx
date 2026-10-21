@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { translations, Translations } from '../data/translations';
+import { useSiteContent, applyTextOverrides } from '../lib/siteContent';
 
 export type Language = 'EN' | 'DE';
 
@@ -26,10 +27,13 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     document.documentElement.lang = language.toLowerCase();
   }, [language]);
 
+  const { overrides } = useSiteContent();
+  const t = useMemo(() => applyTextOverrides(translations[language], overrides, language), [language, overrides]);
+
   const value = {
     language,
     setLanguage,
-    t: translations[language],
+    t,
   };
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, Sparkles, Cpu, Layers, Boxes, Users, ChevronLeft, ChevronRight } from 'lucide-react';
-import { insightsData } from '../../data/insights';
+import { useInsights } from '../../lib/siteContent';
 import { useLanguage } from '../../context/LanguageContext';
 
 export const InsightsSection: React.FC = () => {
@@ -11,6 +11,7 @@ export const InsightsSection: React.FC = () => {
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const { language } = useLanguage();
+  const insightsData = useInsights();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -377,7 +378,7 @@ export const InsightsSection: React.FC = () => {
 
                   <div style={{ paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.25)' }}>
                     <Link
-                      to="/contact"
+                      to={article.hasPage ? `/insights/${article.slug}` : "/contact"}
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -617,7 +618,7 @@ export const InsightsSection: React.FC = () => {
 
               <div style={{ paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.25)' }}>
                 <Link
-                  to="/contact"
+                  to={activeMobileArticle.hasPage ? `/insights/${activeMobileArticle.slug}` : "/contact"}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',

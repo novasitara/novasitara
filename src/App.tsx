@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
+import { SiteContentProvider } from './lib/siteContent';
+import { BlogPostPage } from './pages/BlogPostPage';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { HomePage } from './pages/HomePage';
@@ -33,6 +35,7 @@ const ScrollToTop: React.FC = () => {
 
 export const App: React.FC = () => {
   return (
+    <SiteContentProvider>
     <LanguageProvider>
       <Router>
         <ScrollToTop />
@@ -46,6 +49,7 @@ export const App: React.FC = () => {
               <Route path="/expertise" element={<ExpertisePage />} />
               <Route path="/careers" element={<CareersPage />} />
               <Route path="/careers/:jobId" element={<JobDetailsPage />} />
+              <Route path="/insights/:slug" element={<BlogPostPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/404" element={<NotFoundPage />} />
               <Route path="*" element={<NotFoundPage />} />
@@ -55,6 +59,7 @@ export const App: React.FC = () => {
         </div>
       </Router>
     </LanguageProvider>
+    </SiteContentProvider>
   );
 };
 

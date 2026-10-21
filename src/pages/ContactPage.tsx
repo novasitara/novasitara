@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { SEO } from '../components/common/SEO';
 import { Button } from '../components/common/Button';
 import { api, ContactFormData } from '../services/api';
-import { companyInfo } from '../data/companyInfo';
+import { useCompanyInfo } from '../lib/siteContent';
 import { Phone, Mail, Clock, Linkedin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
+  const companyInfo = useCompanyInfo();
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',

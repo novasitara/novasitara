@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useSiteImage } from '../../lib/siteContent';
 
 export const IsometricHeroIllustration: React.FC = () => {
+  const heroImage = useSiteImage('hero', '/images/hero.png');
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export const IsometricHeroIllustration: React.FC = () => {
       }}
     >
       <img
-        src="/images/hero.png"
+        src={heroImage}
         alt="Nova Sitara Enterprise SAP Sourcing & Technical Architecture"
         style={{
           width: '100%',

@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Target, Hexagon, Users, ShieldCheck, UserCheck } from 'lucide-react';
 import { Button } from '../../components/common/Button';
+import { useSiteImage } from '../../lib/siteContent';
 
 export const AboutPreview: React.FC = () => {
+  const aboutImage = useSiteImage('about', '/images/about.png');
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -229,7 +231,7 @@ export const AboutPreview: React.FC = () => {
                 }}
               >
                 <img
-                  src="/images/about.png"
+                  src={aboutImage}
                   alt="Nova Sitara Enterprise Architecture & Sourcing Flow"
                   style={{
                     width: '100%',

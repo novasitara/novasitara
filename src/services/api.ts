@@ -56,6 +56,15 @@ function mapJob(row: any): JobItem {
     requirements: row.requirements ?? [],
     preferredSkills: row.preferred_skills ?? [],
     benefits: row.benefits ?? [],
+    de: {
+      title: row.title_de ?? undefined,
+      department: row.department_de ?? undefined,
+      overview: row.overview_de ?? undefined,
+      responsibilities: row.responsibilities_de ?? [],
+      requirements: row.requirements_de ?? [],
+      preferredSkills: row.preferred_skills_de ?? [],
+      benefits: row.benefits_de ?? [],
+    },
   };
 }
 

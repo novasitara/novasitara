@@ -3,10 +3,12 @@ import { SEO } from '../components/common/SEO';
 import { CTASection } from '../sections/common/CTASection';
 import { JobCard } from '../components/ui/JobCard';
 import { api } from '../services/api';
-import { JobItem } from '../data/jobs';
+import { JobItem, localizeJob } from '../data/jobs';
+import { useLanguage } from '../context/LanguageContext';
 import { Search, Filter, Briefcase, Loader2 } from 'lucide-react';
 
 export const CareersPage: React.FC = () => {
+  const { language } = useLanguage();
   const [jobs, setJobs] = useState<JobItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,7 +21,7 @@ export const CareersPage: React.FC = () => {
     });
   }, []);
 
-  const filteredJobs = jobs.filter((job) => {
+  const filteredJobs = jobs.map((j) => localizeJob(j, language)).filter((job) => {
     const matchesSearch =
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.overview.toLowerCase().includes(searchTerm.toLowerCase());

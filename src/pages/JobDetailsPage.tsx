@@ -83,7 +83,7 @@ export const JobDetailsPage: React.FC = () => {
     }
 
     if (!formData.resumeFile) {
-      newErrors.resumeFile = 'Please upload your Resume / CV (PDF, DOC, DOCX)';
+      newErrors.resumeFile = 'Please upload your Resume / CV (PDF)';
     }
 
     setErrors(newErrors);

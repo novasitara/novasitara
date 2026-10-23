@@ -21,12 +21,17 @@ export const CareersPage: React.FC = () => {
     });
   }, []);
 
-  const filteredJobs = jobs.map((j) => localizeJob(j, language)).filter((job) => {
+  const localizedJobs = jobs.map((j) => localizeJob(j, language));
+  // Departments come from the live jobs, so a department added in the admin can be filtered right away.
+  const departments = [...new Set(localizedJobs.map((j) => j.department))].sort();
+  // The chosen department may not exist after switching language; fall back to "all".
+  const dept = departments.includes(selectedDept) ? selectedDept : 'all';
+
+  const filteredJobs = localizedJobs.filter((job) => {
     const matchesSearch =
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.overview.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesDept = selectedDept === 'all' || job.department.toLowerCase().includes(selectedDept.toLowerCase());
-    return matchesSearch && matchesDept;
+    return matchesSearch && (dept === 'all' || job.department === dept);
   });
 
   return (
@@ -87,17 +92,15 @@ export const CareersPage: React.FC = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', maxWidth: '280px' }}>
                 <Filter size={16} color="var(--color-text-muted)" />
                 <select
-                  value={selectedDept}
+                  value={dept}
                   onChange={(e) => setSelectedDept(e.target.value)}
                   style={{ padding: '0.65rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-light)', fontSize: '0.9rem', fontFamily: 'inherit', cursor: 'pointer', color: 'var(--color-text-heading)', width: '100%' }}
                   aria-label="Filter by Department"
                 >
                   <option value="all">All Departments</option>
-                  <option value="vistex">Vistex Practice</option>
-                  <option value="supply chain">Supply Chain Consulting</option>
-                  <option value="sap functional">SAP Functional Practice</option>
-                  <option value="procurement">Procurement Consulting</option>
-                  <option value="technical">Technical Engineering</option>
+                  {departments.map((d) => (
+                    <option key={d} value={d}>{d}</option>
+                  ))}
                 </select>
               </div>
             </div>

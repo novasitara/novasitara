@@ -13,7 +13,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   onFileSelect,
   selectedFile,
   allowedTypes = ['.pdf'],
-  maxSizeMB = 0.5,
+  maxSizeMB = 5, // same limit as the API
   error,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -144,7 +144,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
             Click to upload or drag & drop resume
           </p>
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
-            PDF only — Max 500KB
+            PDF only — Max {maxSizeMB}MB
           </p>
         </div>
       ) : (

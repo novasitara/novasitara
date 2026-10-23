@@ -32,8 +32,8 @@ export const BlogPostPage: React.FC = () => {
         description={post.seo_description || post.excerpt_en || title}
       />
       <main>
-        <article className="container" style={{ maxWidth: '780px', padding: 'clamp(3rem, 6vw, 5rem) 0' }}>
-          <Link to="/#insights" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--color-primary)', fontWeight: 600, marginBottom: '1.5rem' }}>
+        <article className="container" style={{ maxWidth: '780px', paddingBlock: 'clamp(3rem, 6vw, 5rem)' }}>
+          <Link to="/#insights" style={{ display: 'flex', width: 'fit-content', alignItems: 'center', gap: '0.4rem', color: 'var(--color-primary)', fontWeight: 600, marginBottom: '1.5rem' }}>
             <ArrowLeft size={16} /> {isDe ? 'Zurück' : 'Back'}
           </Link>
           {category && <div className="eyebrow">{category}</div>}

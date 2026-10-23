@@ -94,8 +94,8 @@ export const api = {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       return { success: false, message: 'Please enter a valid email address.' };
     }
-    if (formData.resumeFile.size > 500 * 1024) {
-      return { success: false, message: 'Resume must be under 500KB. Please compress your PDF and try again.' };
+    if (formData.resumeFile.size > 5 * 1024 * 1024) {
+      return { success: false, message: 'Resume must be under 5 MB. Please compress your PDF and try again.' };
     }
     if (!formData.resumeFile.name.toLowerCase().endsWith('.pdf')) {
       return { success: false, message: 'Only PDF files are accepted.' };

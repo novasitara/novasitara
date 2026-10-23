@@ -1,10 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { supabase } from './supabase';
 import { companyInfo, CompanyInfo } from '../data/companyInfo';
 import { insightsData, InsightArticle } from '../data/insights';
-
-// Content tables added for the admin panel are not in the generated types yet.
-const db = supabase as any;
+import { marketSlidesData, MarketSlide, SlideIconName } from '../data/marketSlides';
 
 export interface SiteLinkRow {
   id: string;
@@ -34,32 +31,49 @@ export interface BlogPostRow {
   created_at: string;
 }
 
+export interface HomeSlideRow {
+  id: string;
+  is_featured: boolean;
+  icon: SlideIconName;
+  tab_label_en: string;
+  tab_label_de: string | null;
+  badge_en: string;
+  badge_de: string | null;
+  title_en: string;
+  title_de: string | null;
+  subtitle_en: string;
+  subtitle_de: string | null;
+  audience_en: string | null;
+  audience_de: string | null;
+  tags_en: string[];
+  tags_de: string[];
+  button_text_en: string | null;
+  button_text_de: string | null;
+  button_link: string | null;
+  image_url: string | null;
+}
+
 interface SiteContentState {
   overrides: Record<string, any>;
   links: SiteLinkRow[];
+  slides: HomeSlideRow[];
   posts: BlogPostRow[];
   loaded: boolean;
 }
 
-const SiteContentContext = createContext<SiteContentState>({ overrides: {}, links: [], posts: [], loaded: false });
+const SiteContentContext = createContext<SiteContentState>({ overrides: {}, links: [], slides: [], posts: [], loaded: false });
 
-// Every query fails soft: if Supabase is unreachable or a table is missing,
-// the website keeps rendering its built-in content.
+// Fails soft: if the API is unreachable, the website keeps rendering its built-in content.
 export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [state, setState] = useState<SiteContentState>({ overrides: {}, links: [], posts: [], loaded: false });
+  const [state, setState] = useState<SiteContentState>({ overrides: {}, links: [], slides: [], posts: [], loaded: false });
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([
-      db.from('site_content').select('key,value'),
-      db.from('site_links').select('*').eq('is_active', true).order('sort_order', { ascending: true }),
-      db.from('blog_posts').select('*').eq('is_published', true).order('published_at', { ascending: false }),
-    ])
-      .then(([content, links, posts]: any[]) => {
+    fetch('/api/content')
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((data: Omit<SiteContentState, 'loaded'>) => {
         if (cancelled) return;
-        const overrides: Record<string, any> = {};
-        (content.data ?? []).forEach((row: any) => { overrides[row.key] = row.value; });
-        setState({ overrides, links: links.data ?? [], posts: posts.data ?? [], loaded: true });
+        setState({ overrides: data.overrides ?? {}, links: data.links ?? [], slides: data.slides ?? [], posts: data.posts ?? [], loaded: true });
       })
       .catch(() => { if (!cancelled) setState((s) => ({ ...s, loaded: true })); });
     return () => { cancelled = true; };
@@ -139,7 +153,42 @@ export function useSiteLinks(group: string, defaults: { label: string; path: str
   }, [links, group, language, JSON.stringify(defaults)]);
 }
 
-const ACCENTS = ['#8F5CE6', '#FFB629', '#E86BCD', '#FF351A'];
+/**
+ * Home page slider: active slides from the admin. Until the API answers (or if it returns none)
+ * the built-in slides are shown; `loaded` lets the slider avoid flashing them before admin slides arrive.
+ */
+export function useMarketSlides(): { slides: MarketSlide[]; loaded: boolean } {
+  const { slides, loaded } = useSiteContent();
+  return useMemo(() => {
+    if (slides.length === 0) return { slides: marketSlidesData, loaded };
+    return {
+      loaded,
+      slides: slides.map((s) => ({
+        id: s.id,
+        icon: s.icon,
+        tabLabelEn: s.tab_label_en,
+        tabLabelDe: s.tab_label_de || s.tab_label_en,
+        badgeEn: s.badge_en,
+        badgeDe: s.badge_de || s.badge_en,
+        titleEn: s.title_en,
+        titleDe: s.title_de || s.title_en,
+        subtitleEn: s.subtitle_en,
+        subtitleDe: s.subtitle_de || s.subtitle_en,
+        targetMarketEn: s.audience_en ?? '',
+        targetMarketDe: s.audience_de || s.audience_en || '',
+        tags: s.tags_en,
+        tagsDe: s.tags_de.length ? s.tags_de : s.tags_en,
+        actionLink: s.button_link ?? '',
+        actionTextEn: s.button_text_en ?? '',
+        actionTextDe: s.button_text_de || s.button_text_en || '',
+        imageUrl: s.image_url ?? undefined,
+        isCurrentPrimary: s.is_featured,
+      })),
+    };
+  }, [slides, loaded]);
+}
+
+const ACCENTS =['#8F5CE6', '#FFB629', '#E86BCD', '#FF351A'];
 
 export interface InsightWithContent extends InsightArticle {
   hasPage?: boolean;

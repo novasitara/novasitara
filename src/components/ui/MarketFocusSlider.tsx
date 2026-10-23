@@ -1,11 +1,33 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Layers, Box, Users2, Code2, Users } from 'lucide-react';
-import { marketSlidesData } from '../../data/marketSlides';
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Layers, Box, Users2, Code2, Users, Briefcase, Globe, Cloud, Shield } from 'lucide-react';
+import type { SlideIconName } from '../../data/marketSlides';
 import { useLanguage } from '../../context/LanguageContext';
+import { useMarketSlides } from '../../lib/siteContent';
+
+const ICONS: Record<SlideIconName, typeof Sparkles> = {
+  sparkles: Sparkles, layers: Layers, box: Box, users2: Users2, code2: Code2, users: Users, briefcase: Briefcase, globe: Globe, cloud: Cloud, shield: Shield,
+};
+
+const ctaStyle: React.CSSProperties = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '0.4rem',
+  fontSize: '0.875rem',
+  fontWeight: 700,
+  color: '#864EA8',
+  backgroundColor: '#F7F2FA',
+  padding: '0.5rem 1rem',
+  borderRadius: '10px',
+  border: '1px solid #EBDDF5',
+  transition: 'all 150ms ease',
+  width: '100%',
+};
 
 export const MarketFocusSlider: React.FC = () => {
   const { language } = useLanguage();
+  const { slides: marketSlidesData, loaded } = useMarketSlides();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [slideKey, setSlideKey] = useState(0);
@@ -26,58 +48,32 @@ export const MarketFocusSlider: React.FC = () => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isPaused, activeIndex]);
+  }, [isPaused, activeIndex, marketSlidesData.length]);
 
   const handleSelectSlide = (idx: number) => {
     setActiveIndex(idx);
     setSlideKey((k) => k + 1);
   };
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + marketSlidesData.length) % marketSlidesData.length);
-    setSlideKey((k) => k + 1);
+  // The slide list can change size when admin slides arrive, so keep the index in range.
+  const currentIndex = activeIndex % marketSlidesData.length;
+  const currentSlide = marketSlidesData[currentIndex];
+  const de = language === 'DE';
+
+  const handlePrev = () => handleSelectSlide((currentIndex - 1 + marketSlidesData.length) % marketSlidesData.length);
+  const handleNext = () => handleSelectSlide((currentIndex + 1) % marketSlidesData.length);
+
+  const tags = (de && currentSlide.tagsDe?.length ? currentSlide.tagsDe : currentSlide.tags);
+  const audience = de ? currentSlide.targetMarketDe : currentSlide.targetMarketEn;
+  const buttonText = de ? currentSlide.actionTextDe : currentSlide.actionTextEn;
+  const isExternal = /^(https?:|mailto:|tel:)/i.test(currentSlide.actionLink);
+
+  const getSlideIcon = (slide: typeof currentSlide) => {
+    const Icon = ICONS[slide.icon] ?? Sparkles;
+    return <Icon size={16} />;
   };
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % marketSlidesData.length);
-    setSlideKey((k) => k + 1);
-  };
-
-  const currentSlide = marketSlidesData[activeIndex];
-
-  const getSlideIcon = (id: string) => {
-    switch (id) {
-      case 'vistex':
-        return <Layers size={16} />;
-      case 'scm-logistics':
-        return <Box size={16} />;
-      case 'successfactors':
-        return <Users2 size={16} />;
-      case 'abap-engineering':
-        return <Code2 size={16} />;
-      case 'strategic-staffing':
-        return <Users size={16} />;
-      default:
-        return <Sparkles size={16} />;
-    }
-  };
-
-  const getShortTabLabel = (id: string) => {
-    switch (id) {
-      case 'vistex':
-        return language === 'DE' ? 'Vistex (Aktiv)' : 'Vistex Practice';
-      case 'scm-logistics':
-        return 'SAP SCM / EWM';
-      case 'successfactors':
-        return 'SuccessFactors';
-      case 'abap-engineering':
-        return 'ABAP & Integration';
-      case 'strategic-staffing':
-        return language === 'DE' ? 'IT-Staffing' : 'Technology Staffing';
-      default:
-        return id;
-    }
-  };
+  const getShortTabLabel = (slide: typeof currentSlide) => (de ? slide.tabLabelDe : slide.tabLabelEn);
 
   return (
     <div
@@ -92,6 +88,8 @@ export const MarketFocusSlider: React.FC = () => {
         boxShadow: '0 8px 24px rgba(134, 78, 168, 0.06)',
         overflow: 'hidden',
         position: 'relative',
+        // Keep the space but don't flash the built-in slides while admin slides are loading.
+        visibility: loaded ? 'visible' : 'hidden',
       }}
     >
       {/* 5-Second Animated Progress Bar */}
@@ -128,7 +126,7 @@ export const MarketFocusSlider: React.FC = () => {
         </div>
 
         {marketSlidesData.map((slide, idx) => {
-          const isActive = idx === activeIndex;
+          const isActive = idx === currentIndex;
           return (
             <button
               key={slide.id}
@@ -151,8 +149,8 @@ export const MarketFocusSlider: React.FC = () => {
                 boxShadow: isActive ? '0 2px 8px rgba(134, 78, 168, 0.25)' : 'none',
               }}
             >
-              {getSlideIcon(slide.id)}
-              <span>{getShortTabLabel(slide.id)}</span>
+              {getSlideIcon(slide)}
+              <span>{getShortTabLabel(slide)}</span>
               {slide.isCurrentPrimary && (
                 <span
                   style={{
@@ -207,17 +205,17 @@ export const MarketFocusSlider: React.FC = () => {
             boxShadow: '0 2px 8px rgba(134, 78, 168, 0.25)',
           }}
         >
-          {getSlideIcon(currentSlide.id)}
-          <span>{getShortTabLabel(currentSlide.id)}</span>
+          {getSlideIcon(currentSlide)}
+          <span>{getShortTabLabel(currentSlide)}</span>
           <span style={{ fontSize: '0.65rem', opacity: 0.8, marginLeft: '0.2rem' }}>
-            ({activeIndex + 1}/{marketSlidesData.length})
+            ({currentIndex + 1}/{marketSlidesData.length})
           </span>
         </div>
       </div>
 
       {/* Active Slide Body */}
       <div
-        key={`slide-${activeIndex}`}
+        key={`slide-${currentIndex}`}
         style={{
           padding: 'clamp(1.25rem, 3.5vw, 2rem)',
           display: 'grid',
@@ -230,7 +228,7 @@ export const MarketFocusSlider: React.FC = () => {
         }}
       >
         {/* Left / Info Side */}
-        <div style={{ gridColumn: 'span 12' }} className="market-slide-left">
+        <div style={{ gridColumn: 'span 12' }} className={currentSlide.imageUrl ? 'market-slide-left has-image' : 'market-slide-left'}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.65rem', flexWrap: 'wrap' }}>
             <span
               style={{
@@ -246,10 +244,12 @@ export const MarketFocusSlider: React.FC = () => {
             >
               {language === 'DE' ? currentSlide.badgeDe : currentSlide.badgeEn}
             </span>
-            <span style={{ fontSize: '0.8rem', color: '#6A6A78', fontWeight: 600 }}>
-              {language === 'DE' ? 'Zielgruppe:' : 'Target Audience:'}{' '}
-              <strong style={{ color: '#111116' }}>{language === 'DE' ? currentSlide.targetMarketDe : currentSlide.targetMarketEn}</strong>
-            </span>
+            {audience && (
+              <span style={{ fontSize: '0.8rem', color: '#6A6A78', fontWeight: 600 }}>
+                {language === 'DE' ? 'Zielgruppe:' : 'Target Audience:'}{' '}
+                <strong style={{ color: '#111116' }}>{audience}</strong>
+              </span>
+            )}
           </div>
 
           <h3
@@ -281,7 +281,7 @@ export const MarketFocusSlider: React.FC = () => {
           {/* Tags & Action CTA */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
-              {currentSlide.tags.map((tag) => (
+              {tags.map((tag) => (
                 <span
                   key={tag}
                   style={{
@@ -299,31 +299,34 @@ export const MarketFocusSlider: React.FC = () => {
               ))}
             </div>
 
-            <div className="market-slide-cta-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', maxWidth: '280px' }}>
-              <Link
-                to={currentSlide.actionLink}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.4rem',
-                  fontSize: '0.875rem',
-                  fontWeight: 700,
-                  color: '#864EA8',
-                  backgroundColor: '#F7F2FA',
-                  padding: '0.5rem 1rem',
-                  borderRadius: '10px',
-                  border: '1px solid #EBDDF5',
-                  transition: 'all 150ms ease',
-                  width: '100%',
-                }}
-              >
-                <span>{language === 'DE' ? currentSlide.actionTextDe : currentSlide.actionTextEn}</span>
-                <ArrowRight size={15} />
-              </Link>
-            </div>
+            {currentSlide.actionLink && buttonText && (
+              <div className="market-slide-cta-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', maxWidth: '280px' }}>
+                {isExternal ? (
+                  <a href={currentSlide.actionLink} target="_blank" rel="noopener noreferrer" style={ctaStyle}>
+                    <span>{buttonText}</span>
+                    <ArrowRight size={15} />
+                  </a>
+                ) : (
+                  <Link to={currentSlide.actionLink} style={ctaStyle}>
+                    <span>{buttonText}</span>
+                    <ArrowRight size={15} />
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
         </div>
+
+        {currentSlide.imageUrl && (
+          <div className="market-slide-image">
+            <img
+              src={currentSlide.imageUrl}
+              alt={de ? currentSlide.titleDe : currentSlide.titleEn}
+              loading="lazy"
+              style={{ width: '100%', height: '100%', maxHeight: '220px', objectFit: 'cover', borderRadius: '14px', border: '1px solid #ECE6F2', display: 'block' }}
+            />
+          </div>
+        )}
       </div>
 
       {/* Progress Line & Prev/Next Controls */}
@@ -344,10 +347,10 @@ export const MarketFocusSlider: React.FC = () => {
               type="button"
               onClick={() => handleSelectSlide(dotIdx)}
               style={{
-                width: dotIdx === activeIndex ? '24px' : '8px',
+                width: dotIdx === currentIndex ? '24px' : '8px',
                 height: '6px',
                 borderRadius: '4px',
-                backgroundColor: dotIdx === activeIndex ? '#864EA8' : '#D5CBDD',
+                backgroundColor: dotIdx === currentIndex ? '#864EA8' : '#D5CBDD',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 200ms ease',
@@ -357,7 +360,7 @@ export const MarketFocusSlider: React.FC = () => {
             />
           ))}
           <span style={{ fontSize: '0.75rem', color: '#7E7E8E', marginLeft: '0.5rem', fontFamily: 'monospace', fontWeight: 600 }}>
-            {activeIndex + 1} / {marketSlidesData.length} (5s)
+            {currentIndex + 1} / {marketSlidesData.length} (5s)
           </span>
         </div>
 
@@ -404,7 +407,16 @@ export const MarketFocusSlider: React.FC = () => {
       </div>
 
       <style>{`
+        .market-slide-image {
+          grid-column: span 12;
+        }
         @media (min-width: 768px) {
+          .market-slide-left.has-image {
+            grid-column: span 8 !important;
+          }
+          .market-slide-image {
+            grid-column: span 4;
+          }
           .market-slider-desktop-tabs {
             display: flex !important;
           }

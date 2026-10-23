@@ -1,5 +1,11 @@
+export type SlideIconName = 'sparkles' | 'layers' | 'box' | 'users2' | 'code2' | 'users' | 'briefcase' | 'globe' | 'cloud' | 'shield';
+
+/** One slide of the home page Market Focus slider. Admin-edited slides come from the API (see useMarketSlides). */
 export interface MarketSlide {
   id: string;
+  icon: SlideIconName;
+  tabLabelEn: string;
+  tabLabelDe: string;
   badgeEn: string;
   badgeDe: string;
   titleEn: string;
@@ -9,15 +15,21 @@ export interface MarketSlide {
   targetMarketEn: string;
   targetMarketDe: string;
   tags: string[];
+  tagsDe?: string[];
+  /** Empty = no button. */
   actionLink: string;
   actionTextEn: string;
   actionTextDe: string;
+  imageUrl?: string;
   isCurrentPrimary?: boolean;
 }
 
 export const marketSlidesData: MarketSlide[] = [
   {
     id: 'vistex',
+    icon: 'layers',
+    tabLabelEn: 'Vistex Practice',
+    tabLabelDe: 'Vistex (Aktiv)',
     badgeEn: 'ACTIVE PRIMARY FOCUS',
     badgeDe: 'AKTUELLER HAUPTFOKUS',
     titleEn: 'Specialized Vistex Staffing & Sourcing Solutions',
@@ -34,6 +46,9 @@ export const marketSlidesData: MarketSlide[] = [
   },
   {
     id: 'scm-logistics',
+    icon: 'box',
+    tabLabelEn: 'SAP SCM / EWM',
+    tabLabelDe: 'SAP SCM / EWM',
     badgeEn: 'SUPPLY CHAIN FOCUS',
     badgeDe: 'SUPPLY CHAIN FOKUS',
     titleEn: 'SAP Extended Warehouse & SCM Functional Specialists',
@@ -49,6 +64,9 @@ export const marketSlidesData: MarketSlide[] = [
   },
   {
     id: 'successfactors',
+    icon: 'users2',
+    tabLabelEn: 'SuccessFactors',
+    tabLabelDe: 'SuccessFactors',
     badgeEn: 'CLOUD HXM FOCUS',
     badgeDe: 'CLOUD HXM FOKUS',
     titleEn: 'SAP SuccessFactors Cloud Transformation & Consulting',
@@ -64,6 +82,9 @@ export const marketSlidesData: MarketSlide[] = [
   },
   {
     id: 'abap-engineering',
+    icon: 'code2',
+    tabLabelEn: 'ABAP & Integration',
+    tabLabelDe: 'ABAP & Integration',
     badgeEn: 'TECHNICAL ARCHITECTURE',
     badgeDe: 'TECHNISCHE ARCHITEKTUR',
     titleEn: 'Custom ABAP, RICEFW Development & System Integration',
@@ -79,6 +100,9 @@ export const marketSlidesData: MarketSlide[] = [
   },
   {
     id: 'strategic-staffing',
+    icon: 'users',
+    tabLabelEn: 'Technology Staffing',
+    tabLabelDe: 'IT-Staffing',
     badgeEn: 'STRATEGIC TALENT POOL',
     badgeDe: 'STRATEGISCHER TALENTPOOL',
     titleEn: 'Flexible On-Demand SAP & Vistex Project Staffing',

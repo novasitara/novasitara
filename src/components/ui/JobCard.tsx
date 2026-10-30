@@ -1,14 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Briefcase, Clock, ArrowRight } from 'lucide-react';
-import { JobItem } from '../../data/jobs';
+import { JobItem, localizeJob } from '../../data/jobs';
+import { useLanguage } from '../../context/LanguageContext';
 import { Badge } from '../common/Badge';
 
 interface JobCardProps {
   job: JobItem;
 }
 
-export const JobCard: React.FC<JobCardProps> = ({ job }) => {
+export const JobCard: React.FC<JobCardProps> = ({ job: rawJob }) => {
+  const { language } = useLanguage();
+  const job = localizeJob(rawJob, language);
   const isVistex = job.id === 'vistex-consultant';
 
   return (

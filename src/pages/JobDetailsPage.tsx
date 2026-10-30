@@ -5,13 +5,16 @@ import { Button } from '../components/common/Button';
 import { FileUpload } from '../components/common/FileUpload';
 import { Badge } from '../components/common/Badge';
 import { api, ApplicationFormData } from '../services/api';
-import { JobItem } from '../data/jobs';
+import { JobItem, localizeJob } from '../data/jobs';
+import { useLanguage } from '../context/LanguageContext';
 import { MapPin, Briefcase, Clock, ArrowLeft, CheckCircle2, AlertCircle, Send, Sparkles } from 'lucide-react';
 
 export const JobDetailsPage: React.FC = () => {
   const { jobId } = useParams<{ jobId: string }>();
   const navigate = useNavigate();
-  const [job, setJob] = useState<JobItem | null>(null);
+  const { language } = useLanguage();
+  const [rawJob, setJob] = useState<JobItem | null>(null);
+  const job = rawJob ? localizeJob(rawJob, language) : null;
   const [isLoadingJob, setIsLoadingJob] = useState(true);
 
   // Form State
@@ -80,7 +83,7 @@ export const JobDetailsPage: React.FC = () => {
     }
 
     if (!formData.resumeFile) {
-      newErrors.resumeFile = 'Please upload your Resume / CV (PDF, DOC, DOCX)';
+      newErrors.resumeFile = 'Please upload your Resume / CV (PDF)';
     }
 
     setErrors(newErrors);

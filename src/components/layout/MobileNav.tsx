@@ -4,8 +4,8 @@ import { X, ArrowRight, Phone, Mail } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../common/Button';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
-import { companyInfo } from '../../data/companyInfo';
 import { useLanguage } from '../../context/LanguageContext';
+import { useSiteLinks, useCompanyInfo } from '../../lib/siteContent';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -14,7 +14,16 @@ interface MobileNavProps {
 
 export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
   const drawerRef = useRef<HTMLDivElement>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const companyInfo = useCompanyInfo();
+  const navLinks = useSiteLinks('navbar', [
+    { label: t.nav.home, path: '/' },
+    { label: t.nav.about, path: '/about' },
+    { label: t.nav.services, path: '/services' },
+    { label: t.nav.expertise, path: '/expertise' },
+    { label: t.nav.careers, path: '/careers' },
+    { label: t.nav.contact, path: '/contact' },
+  ], language);
 
   // Handle body scroll lock & keydown (Esc)
   useEffect(() => {
@@ -38,15 +47,6 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
-
-  const navLinks = [
-    { label: t.nav.home, path: '/' },
-    { label: t.nav.about, path: '/about' },
-    { label: t.nav.services, path: '/services' },
-    { label: t.nav.expertise, path: '/expertise' },
-    { label: t.nav.careers, path: '/careers' },
-    { label: t.nav.contact, path: '/contact' },
-  ];
 
   return (
     <div
@@ -130,6 +130,18 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                   animation: `fadeIn 300ms ease forwards ${idx * 60}ms`,
                 }}
               >
+                {link.external ? (
+                  <a
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.85rem 1rem', borderRadius: 'var(--radius-md)', fontWeight: 500, fontSize: '1.05rem', color: 'var(--color-text-heading)' }}
+                  >
+                    <span>{link.label}</span>
+                    <ArrowRight size={16} style={{ opacity: 0.5 }} />
+                  </a>
+                ) : (
                 <NavLink
                   to={link.path}
                   onClick={onClose}
@@ -150,6 +162,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                   <span>{link.label}</span>
                   <ArrowRight size={16} style={{ opacity: 0.5 }} />
                 </NavLink>
+                )}
               </li>
             ))}
           </ul>

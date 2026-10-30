@@ -2,9 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, Linkedin, Clock } from 'lucide-react';
 import { Logo } from '../common/Logo';
-import { companyInfo } from '../../data/companyInfo';
+import { useCompanyInfo, useSiteLinks } from '../../lib/siteContent';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const Footer: React.FC = () => {
+  const companyInfo = useCompanyInfo();
+  const { language } = useLanguage();
+  const footerLinks = useSiteLinks('footer', [
+    { label: 'Home', path: '/' },
+    { label: 'About Us', path: '/about' },
+    { label: 'Services', path: '/services' },
+    { label: 'Expertise Areas', path: '/expertise' },
+    { label: 'Contact Us', path: '/contact' },
+  ], language);
   return (
     <footer
       style={{
@@ -57,31 +67,19 @@ export const Footer: React.FC = () => {
               NAVIGATION
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <li>
-                <Link to="/" style={{ color: '#A0A0B0', fontSize: '0.925rem', transition: 'color 150ms ease' }}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" style={{ color: '#A0A0B0', fontSize: '0.925rem', transition: 'color 150ms ease' }}>
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" style={{ color: '#A0A0B0', fontSize: '0.925rem', transition: 'color 150ms ease' }}>
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link to="/expertise" style={{ color: '#A0A0B0', fontSize: '0.925rem', transition: 'color 150ms ease' }}>
-                  Expertise Areas
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" style={{ color: '#A0A0B0', fontSize: '0.925rem', transition: 'color 150ms ease' }}>
-                  Contact Us
-                </Link>
-              </li>
+              {footerLinks.map((link) => (
+                <li key={link.path + link.label}>
+                  {link.external ? (
+                    <a href={link.path} target="_blank" rel="noopener noreferrer" style={{ color: '#A0A0B0', fontSize: '0.925rem', transition: 'color 150ms ease' }}>
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link to={link.path} style={{ color: '#A0A0B0', fontSize: '0.925rem', transition: 'color 150ms ease' }}>
+                      {link.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
 

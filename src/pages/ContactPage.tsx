@@ -3,7 +3,7 @@ import { SEO } from '../components/common/SEO';
 import { Button } from '../components/common/Button';
 import { api, ContactFormData } from '../services/api';
 import { useCompanyInfo } from '../lib/siteContent';
-import { Phone, Mail, Clock, Linkedin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Phone, Mail, Clock, Linkedin, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
   const companyInfo = useCompanyInfo();
@@ -229,29 +229,96 @@ export const ContactPage: React.FC = () => {
                     </div>
                   </div>
 
+                  {/* Office Hubs */}
+                  {(companyInfo.addresses?.india || companyInfo.addresses?.germany) && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '1rem',
+                        padding: '1.25rem 1.5rem',
+                        borderRadius: 'var(--radius-lg)',
+                        backgroundColor: 'var(--color-bg-subtle)',
+                        border: '1px solid var(--color-border)',
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: '44px',
+                          height: '44px',
+                          borderRadius: 'var(--radius-md)',
+                          backgroundColor: 'var(--color-primary-light)',
+                          color: 'var(--color-primary)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                        }}
+                      >
+                        <MapPin size={20} />
+                      </div>
+                      <div>
+                        <h4 style={{ fontSize: '1.05rem', marginBottom: '0.35rem', color: 'var(--color-text-heading)' }}>Office Hubs</h4>
+                        {companyInfo.addresses?.india && (
+                          <p style={{ fontSize: '0.925rem', color: 'var(--color-text-body)', margin: '0 0 0.25rem 0' }}>
+                            <strong style={{ color: 'var(--color-text-heading)' }}>India:</strong> {companyInfo.addresses.india}
+                          </p>
+                        )}
+                        {companyInfo.addresses?.germany && (
+                          <p style={{ fontSize: '0.925rem', color: 'var(--color-text-body)', margin: 0 }}>
+                            <strong style={{ color: 'var(--color-text-heading)' }}>Germany:</strong> {companyInfo.addresses.germany}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
                   {/* LinkedIn */}
                   <div
                     style={{
                       display: 'flex',
-                      alignItems: 'center',
+                      alignItems: 'flex-start',
                       gap: '1rem',
                       padding: '1.25rem 1.5rem',
                       borderRadius: 'var(--radius-lg)',
-                      backgroundColor: 'var(--color-dark-surface)',
-                      color: '#FFFFFF',
-                      wordBreak: 'break-word',
+                      backgroundColor: 'var(--color-bg-subtle)',
+                      border: '1px solid var(--color-border)',
                     }}
                   >
-                    <Linkedin size={22} color="#C084FC" style={{ flexShrink: 0 }} />
+                    <div
+                      style={{
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: 'var(--radius-md)',
+                        backgroundColor: 'var(--color-primary-light)',
+                        color: 'var(--color-primary)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Linkedin size={20} />
+                    </div>
                     <div style={{ wordBreak: 'break-word', maxWidth: '100%' }}>
-                      <p style={{ fontSize: '0.925rem', fontWeight: 600, margin: 0 }}>Nova Sitara LinkedIn</p>
+                      <h4 style={{ fontSize: '1.05rem', marginBottom: '0.35rem', color: 'var(--color-text-heading)' }}>LinkedIn</h4>
                       <a
                         href={companyInfo.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ fontSize: '0.825rem', color: '#C084FC', textDecoration: 'underline', wordBreak: 'break-all' }}
+                        style={{
+                          fontSize: '0.925rem',
+                          fontWeight: 600,
+                          color: 'var(--color-primary)',
+                          textDecoration: 'none',
+                          wordBreak: 'break-all',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.35rem',
+                        }}
                       >
-                        {companyInfo.linkedin}
+                        <span>{companyInfo.linkedin}</span>
+                        <span aria-hidden="true">&rarr;</span>
                       </a>
                     </div>
                   </div>

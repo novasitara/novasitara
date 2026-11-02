@@ -13,6 +13,10 @@ export interface CompanyInfo {
     weekdays: string;
     weekends: string;
   };
+  addresses: {
+    india: string;
+    germany: string;
+  };
   linkedin: string;
   highlights: Array<{
     title: string;
@@ -34,6 +38,10 @@ export const companyInfo: CompanyInfo = {
   businessHours: {
     weekdays: "Monday – Friday: 9:00 AM – 5:00 PM",
     weekends: "Saturday – Sunday: Holiday"
+  },
+  addresses: {
+    india: "Ahmedabad, Gujarat, India",
+    germany: "Frankfurt am Main, Germany"
   },
   linkedin: "https://www.linkedin.com/company/novasitara/",
   highlights: [

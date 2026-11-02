@@ -191,8 +191,14 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Phone size={14} color="var(--color-primary)" />
-            <span>{companyInfo.phones.india}</span>
+            <span>IN: {companyInfo.phones.india}</span>
           </div>
+          {companyInfo.phones.germany && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Phone size={14} color="var(--color-primary)" />
+              <span>DE: {companyInfo.phones.germany}</span>
+            </div>
+          )}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Mail size={14} color="var(--color-primary)" />
             <span>{companyInfo.email}</span>

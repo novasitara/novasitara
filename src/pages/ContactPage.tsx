@@ -251,7 +251,7 @@ export const ContactPage: React.FC = () => {
                         rel="noopener noreferrer"
                         style={{ fontSize: '0.825rem', color: '#C084FC', textDecoration: 'underline', wordBreak: 'break-all' }}
                       >
-                        https://www.linkedin.com/company/novasitara/
+                        {companyInfo.linkedin}
                       </a>
                     </div>
                   </div>

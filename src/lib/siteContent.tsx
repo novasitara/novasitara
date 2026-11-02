@@ -121,6 +121,10 @@ export function useCompanyInfo(): CompanyInfo {
         weekdays: pick(c.hours_weekdays, companyInfo.businessHours.weekdays),
         weekends: pick(c.hours_weekends, companyInfo.businessHours.weekends),
       },
+      addresses: {
+        india: pick(c.address_india, companyInfo.addresses.india),
+        germany: pick(c.address_germany, companyInfo.addresses.germany),
+      },
     };
   }, [overrides]);
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSiteImage } from '../../lib/siteContent';
 
 interface LogoProps {
   variant?: 'default' | 'light' | 'dark';
@@ -14,6 +15,7 @@ export const Logo: React.FC<LogoProps> = ({
   className = '',
   height = 23,
 }) => {
+  const logoUrl = useSiteImage('logo', '/images/logo.jpeg');
   const isDarkBg = variant === 'dark';
   const textColor = isDarkBg ? '#FFFFFF' : '#000000';
 
@@ -49,7 +51,7 @@ export const Logo: React.FC<LogoProps> = ({
         aria-label="Nova Sitara Logo"
       >
         <image
-          href="/images/logo.jpeg"
+          href={logoUrl}
           x="0"
           y="0"
           width="1024"

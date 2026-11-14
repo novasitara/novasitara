@@ -4,6 +4,7 @@ import { Menu } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../common/Button';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
+import { PortalLoginMenu } from '../common/PortalLoginMenu';
 import { MobileNav } from './MobileNav';
 import { useLanguage } from '../../context/LanguageContext';
 import { useSiteLinks } from '../../lib/siteContent';
@@ -113,8 +114,10 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Desktop CTA Button & Language Switcher */}
-          <div className="desktop-cta" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <div className="desktop-cta" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
             <LanguageSwitcher />
+
+            <PortalLoginMenu />
 
             <Link to="/contact">
               <Button variant="secondary" size="md">

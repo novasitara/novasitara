@@ -4,6 +4,7 @@ import { X, ArrowRight, Phone, Mail } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../common/Button';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
+import { PortalLoginMenu } from '../common/PortalLoginMenu';
 import { useLanguage } from '../../context/LanguageContext';
 import { useSiteLinks, useCompanyInfo } from '../../lib/siteContent';
 
@@ -167,7 +168,9 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
             ))}
           </ul>
 
-          <div style={{ marginTop: '2rem' }}>
+          <div style={{ marginTop: '2rem', display: 'grid', gap: '0.75rem' }}>
+            <PortalLoginMenu mobile />
+
             <NavLink to="/contact" onClick={onClose} style={{ textDecoration: 'none' }}>
               <Button variant="primary" style={{ width: '100%' }}>
                 {t.nav.talkToUs}

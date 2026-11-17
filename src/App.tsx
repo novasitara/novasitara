@@ -13,6 +13,7 @@ import { CareersPage } from './pages/CareersPage';
 import { JobDetailsPage } from './pages/JobDetailsPage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { PortalPage } from './pages/PortalPage';
 
 // Scroll to top helper on route change
 const ScrollToTop: React.FC = () => {
@@ -33,12 +34,7 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
-export const App: React.FC = () => {
-  return (
-    <SiteContentProvider>
-    <LanguageProvider>
-      <Router>
-        <ScrollToTop />
+const PublicSite: React.FC = () => (
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Navbar />
           <div style={{ flex: 1 }}>
@@ -57,6 +53,20 @@ export const App: React.FC = () => {
           </div>
           <Footer />
         </div>
+);
+
+export const App: React.FC = () => {
+  return (
+    <SiteContentProvider>
+    <LanguageProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/portal" element={<PortalPage mode="employee" />} />
+          <Route path="/portal/owner" element={<PortalPage mode="owner" />} />
+          <Route path="/portal/activate" element={<PortalPage mode="activate" />} />
+          <Route path="*" element={<PublicSite />} />
+        </Routes>
       </Router>
     </LanguageProvider>
     </SiteContentProvider>

@@ -1,4 +1,13 @@
 {
+  "headers": [
+    {
+      "source": "/portal/:path*",
+      "headers": [
+        { "key": "Referrer-Policy", "value": "same-origin" },
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://api.novasitara.com/api/:path*" },
     { "source": "/uploads/:path*", "destination": "https://api.novasitara.com/uploads/:path*" },

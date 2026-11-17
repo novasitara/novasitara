@@ -1,8 +1,7 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
 import { Briefcase, ChevronDown, ShieldCheck, UserRound } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
-
-const portalBaseUrl = 'https://nova-sitara-expense-hub.ravipaidi1994.chatgpt.site';
 
 interface PortalLoginMenuProps {
   mobile?: boolean;
@@ -20,20 +19,18 @@ export const PortalLoginMenu: React.FC<PortalLoginMenuProps> = ({ mobile = false
         heading: 'Nova Sitara Mitarbeiterportal',
         intro: 'Wählen Sie Ihren sicheren Zugang.',
         employee: 'Mitarbeiter-Login',
-        employeeDescription: 'Ausgaben, Dokumente und Mitarbeiterbereich',
+        employeeDescription: 'Anmeldung mit Ihrer registrierten E-Mail-Adresse',
         owner: 'Inhaber-Login',
-        ownerDescription: 'Genehmigungen und Unternehmensübersicht',
-        accountant: 'Die Buchhaltung nutzt den Mitarbeiter-Login mit der eingeladenen E-Mail-Adresse.',
+        ownerDescription: 'Mitarbeiterkonten und Zugriffsrechte verwalten',
       }
     : {
         button: 'Login',
         heading: 'Nova Sitara Employee Portal',
         intro: 'Choose your secure access.',
         employee: 'Employee Login',
-        employeeDescription: 'Expenses, documents and employee workspace',
+        employeeDescription: 'Sign in with your registered email address',
         owner: 'Owner Login',
-        ownerDescription: 'Approvals and company dashboard',
-        accountant: 'Accountants use Employee Login with their invited email address.',
+        ownerDescription: 'Manage employee accounts and access',
       };
 
   useEffect(() => {
@@ -138,8 +135,8 @@ export const PortalLoginMenu: React.FC<PortalLoginMenuProps> = ({ mobile = false
           </div>
 
           <div style={{ display: 'grid', gap: '0.6rem' }}>
-            <a
-              href={`${portalBaseUrl}/portal`}
+            <Link
+              to="/portal"
               style={portalLinkStyle}
               onClick={() => setIsOpen(false)}
             >
@@ -153,10 +150,10 @@ export const PortalLoginMenu: React.FC<PortalLoginMenuProps> = ({ mobile = false
                 </span>
               </span>
               <span aria-hidden="true" style={{ color: 'var(--color-primary)', fontWeight: 800 }}>→</span>
-            </a>
+            </Link>
 
-            <a
-              href={`${portalBaseUrl}/hub.html`}
+            <Link
+              to="/portal/owner"
               style={portalLinkStyle}
               onClick={() => setIsOpen(false)}
             >
@@ -170,12 +167,8 @@ export const PortalLoginMenu: React.FC<PortalLoginMenuProps> = ({ mobile = false
                 </span>
               </span>
               <span aria-hidden="true" style={{ color: 'var(--color-primary)', fontWeight: 800 }}>→</span>
-            </a>
+            </Link>
           </div>
-
-          <p style={{ marginTop: '0.75rem', color: 'var(--color-text-muted)', fontSize: '0.72rem', lineHeight: 1.45 }}>
-            {labels.accountant}
-          </p>
         </div>
       )}
     </div>

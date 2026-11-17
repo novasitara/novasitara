@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Briefcase, Clock, ArrowRight } from 'lucide-react';
-import { JobItem, localizeJob } from '../../data/jobs';
+import { formatOpportunityDate, JobItem, localizeJob } from '../../data/jobs';
 import { useLanguage } from '../../context/LanguageContext';
 import { Badge } from '../common/Badge';
 
@@ -13,6 +13,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job: rawJob }) => {
   const { language } = useLanguage();
   const job = localizeJob(rawJob, language);
   const isVistex = job.id === 'vistex-consultant';
+  const isSourced = job.source?.type === 'sourced';
 
   return (
     <div
@@ -33,14 +34,15 @@ export const JobCard: React.FC<JobCardProps> = ({ job: rawJob }) => {
           <Badge variant={isVistex ? 'purple' : 'gray'} size="sm">
             {job.department}
           </Badge>
-          <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
-            Posted {job.postedDate}
+          <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', textAlign: 'right' }}>
+            {isSourced && job.source?.lastVerified ? `Verified ${formatOpportunityDate(job.source.lastVerified)}` : `Posted ${job.postedDate}`}
           </span>
         </div>
 
         <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: 'var(--color-text-heading)' }}>
           {job.title}
         </h3>
+        {isSourced && <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-primary)', marginBottom: '0.7rem' }}>Partner opportunity · Source: {job.source?.company || 'Recruitment partner'}</div>}
 
         <p
           style={{
@@ -103,7 +105,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job: rawJob }) => {
             border: isVistex ? 'none' : '1px solid var(--color-border)',
           }}
         >
-          <span>View Details & Apply</span>
+          <span>{isSourced ? 'View Opportunity' : 'View Details & Apply'}</span>
           <ArrowRight size={16} />
         </Link>
       </div>

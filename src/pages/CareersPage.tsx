@@ -3,7 +3,7 @@ import { SEO } from '../components/common/SEO';
 import { CTASection } from '../sections/common/CTASection';
 import { JobCard } from '../components/ui/JobCard';
 import { api } from '../services/api';
-import { JobItem, localizeJob } from '../data/jobs';
+import { isJobExpired, JobItem, localizeJob } from '../data/jobs';
 import { useLanguage } from '../context/LanguageContext';
 import { Search, Filter, Briefcase, Loader2 } from 'lucide-react';
 
@@ -13,6 +13,7 @@ export const CareersPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDept, setSelectedDept] = useState('all');
+  const [selectedSource, setSelectedSource] = useState('all');
 
   useEffect(() => {
     api.getJobs().then((res) => {
@@ -21,7 +22,7 @@ export const CareersPage: React.FC = () => {
     });
   }, []);
 
-  const localizedJobs = jobs.map((j) => localizeJob(j, language));
+  const localizedJobs = jobs.map((j) => localizeJob(j, language)).filter((j) => !isJobExpired(j));
   // Departments come from the live jobs, so a department added in the admin can be filtered right away.
   const departments = [...new Set(localizedJobs.map((j) => j.department))].sort();
   // The chosen department may not exist after switching language; fall back to "all".
@@ -31,7 +32,8 @@ export const CareersPage: React.FC = () => {
     const matchesSearch =
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.overview.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesSearch && (dept === 'all' || job.department === dept);
+    const sourceType = job.source?.type ?? 'nova_sitara';
+    return matchesSearch && (dept === 'all' || job.department === dept) && (selectedSource === 'all' || sourceType === selectedSource);
   });
 
   return (
@@ -52,13 +54,16 @@ export const CareersPage: React.FC = () => {
         >
           <div className="container">
             <div style={{ maxWidth: '800px' }}>
-              <div className="eyebrow">Join Our Expert Team</div>
+              <div className="eyebrow">SAP Opportunities Across Europe</div>
               <h1 style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(2.1rem, 4.2vw, 3.25rem)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em', marginBottom: '1.25rem', color: 'var(--color-text-heading)', wordBreak: 'normal', overflowWrap: 'break-word' }}>
-                Build Your Consulting Career with <br className="desktop-br-only" />
-                <span style={{ color: 'var(--color-primary)' }}>SAP & Vistex Leaders.</span>
+                Find the Right SAP Project. <br className="desktop-br-only" />
+                <span style={{ color: 'var(--color-primary)' }}>Build What Comes Next.</span>
               </h1>
               <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', lineHeight: 1.6, color: 'var(--color-text-body)' }}>
-                Work on global enterprise implementation projects, solve complex incentive challenges, and accelerate your functional and technical mastery.
+                Explore selected Nova Sitara roles and verified partner opportunities for Vistex, SAP SD/OTC, EWM, DRC and related specializations.
+              </p>
+              <p style={{ marginTop: '1rem', fontSize: '0.82rem', lineHeight: 1.55, color: 'var(--color-text-muted)' }}>
+                Partner opportunities are independently summarized by Nova Sitara. The original source, reference and verification date are shown on every listing. Candidates are never charged a placement fee.
               </p>
             </div>
           </div>
@@ -101,6 +106,13 @@ export const CareersPage: React.FC = () => {
                   {departments.map((d) => (
                     <option key={d} value={d}>{d}</option>
                   ))}
+                </select>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', maxWidth: '230px' }}>
+                <select value={selectedSource} onChange={(e) => setSelectedSource(e.target.value)} className="careers-source-filter" style={{ padding: '0.65rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-light)', fontSize: '0.9rem', fontFamily: 'inherit', cursor: 'pointer', color: 'var(--color-text-heading)', width: '100%' }} aria-label="Filter by opportunity source">
+                  <option value="all">All Opportunities</option>
+                  <option value="nova_sitara">Nova Sitara Roles</option>
+                  <option value="sourced">Partner Opportunities</option>
                 </select>
               </div>
             </div>

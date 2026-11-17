@@ -5,9 +5,9 @@ import { Button } from '../components/common/Button';
 import { FileUpload } from '../components/common/FileUpload';
 import { Badge } from '../components/common/Badge';
 import { api, ApplicationFormData } from '../services/api';
-import { JobItem, localizeJob } from '../data/jobs';
+import { formatOpportunityDate, isJobExpired, JobItem, localizeJob } from '../data/jobs';
 import { useLanguage } from '../context/LanguageContext';
-import { MapPin, Briefcase, Clock, ArrowLeft, CheckCircle2, AlertCircle, Send, Sparkles } from 'lucide-react';
+import { MapPin, Briefcase, Clock, ArrowLeft, CheckCircle2, AlertCircle, Send, Sparkles, ExternalLink } from 'lucide-react';
 
 export const JobDetailsPage: React.FC = () => {
   const { jobId } = useParams<{ jobId: string }>();
@@ -28,6 +28,7 @@ export const JobDetailsPage: React.FC = () => {
     linkedInUrl: '',
     coverLetter: '',
     resumeFile: null,
+    sharingConsent: false,
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -85,6 +86,9 @@ export const JobDetailsPage: React.FC = () => {
     if (!formData.resumeFile) {
       newErrors.resumeFile = 'Please upload your Resume / CV (PDF)';
     }
+    if (job?.source?.type === 'sourced' && !formData.sharingConsent) {
+      newErrors.sharingConsent = 'Your consent is required for this partner opportunity';
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -92,11 +96,11 @@ export const JobDetailsPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate() || !jobId) return;
+    if (!validate() || !job) return;
 
     setIsSubmitting(true);
     try {
-      const response = await api.submitApplication(jobId, formData);
+      const response = await api.submitApplication(job, formData);
       setIsSubmitting(false);
 
       if (response.success) {
@@ -136,6 +140,9 @@ export const JobDetailsPage: React.FC = () => {
     );
   }
 
+  const sourced = job.source?.type === 'sourced';
+  const expired = isJobExpired(job);
+
   return (
     <>
       <SEO
@@ -173,7 +180,7 @@ export const JobDetailsPage: React.FC = () => {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
                   <Badge variant="purple">{job.department}</Badge>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>Posted {job.postedDate}</span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>{sourced && job.source?.lastVerified ? `Verified ${formatOpportunityDate(job.source.lastVerified)}` : `Posted ${job.postedDate}`}</span>
                 </div>
                 <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)', color: 'var(--color-text-heading)', wordBreak: 'break-word' }}>
                   {job.title}
@@ -181,12 +188,30 @@ export const JobDetailsPage: React.FC = () => {
               </div>
 
               <div style={{ width: '100%', maxWidth: '280px' }}>
-                <a href="#apply-form" style={{ display: 'inline-block', width: '100%' }}>
+                <a href={expired ? undefined : '#apply-form'} style={{ display: 'inline-block', width: '100%', pointerEvents: expired ? 'none' : 'auto' }}>
                   <Button variant="primary" size="lg" style={{ width: '100%' }}>
-                    Apply for Position
+                    {expired ? 'Opportunity Closed' : 'Apply for Position'}
                   </Button>
                 </a>
               </div>
+              {sourced && (
+                <div style={{ marginTop: '1.5rem', padding: '1rem 1.15rem', borderRadius: 'var(--radius-lg)', backgroundColor: '#fff', border: '1px solid rgba(134, 78, 168, 0.28)' }}>
+                  <div style={{ fontWeight: 800, color: 'var(--color-text-heading)', marginBottom: '0.45rem' }}>Verified partner opportunity</div>
+                  <p style={{ fontSize: '0.86rem', lineHeight: 1.55, color: 'var(--color-text-body)', marginBottom: '0.65rem' }}>
+                    Nova Sitara independently summarized this opportunity from {job.source?.company || 'the named recruitment partner'}. We are not the original advertiser. We review candidate fit before any CV is shared, and candidates are never charged a placement fee.
+                  </p>
+                  <div style={{ display: 'flex', gap: '0.65rem 1.35rem', flexWrap: 'wrap', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
+                    {job.source?.reference && <span><strong>Reference:</strong> {job.source.reference}</span>}
+                    {job.source?.workModel && <span><strong>Work model:</strong> {job.source.workModel}</span>}
+                    {job.source?.startDate && <span><strong>Start:</strong> {job.source.startDate}</span>}
+                    {job.source?.duration && <span><strong>Duration:</strong> {job.source.duration}</span>}
+                    {job.source?.workload && <span><strong>Workload:</strong> {job.source.workload}</span>}
+                    {job.source?.languages && <span><strong>Languages:</strong> {job.source.languages}</span>}
+                    {job.source?.expiresAt && <span><strong>Review by:</strong> {formatOpportunityDate(job.source.expiresAt)}</span>}
+                  </div>
+                  {job.source?.url && <a href={job.source.url} target="_blank" rel="noopener noreferrer nofollow" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.75rem', fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-primary)' }}>View original source <ExternalLink size={14} /></a>}
+                </div>
+              )}
             </div>
 
             <div
@@ -287,7 +312,7 @@ export const JobDetailsPage: React.FC = () => {
 
                   {/* Benefits */}
                   <div>
-                    <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>What We Offer</h3>
+                    <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>{sourced ? 'Engagement Details' : 'What We Offer'}</h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                       {job.benefits.map((b, i) => (
                         <div
@@ -323,12 +348,14 @@ export const JobDetailsPage: React.FC = () => {
                     boxShadow: 'var(--shadow-lg)',
                   }}
                 >
-                  <h3 style={{ fontSize: '1.35rem', marginBottom: '0.35rem' }}>Apply for this Role</h3>
+                  <h3 style={{ fontSize: '1.35rem', marginBottom: '0.35rem' }}>{expired ? 'This Opportunity Has Closed' : 'Apply for this Role'}</h3>
                   <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1.75rem' }}>
-                    Submit your application details below. Our recruiting team will review your CV.
+                    {expired ? 'The verification window for this listing has ended. Please return to Careers for active roles.' : sourced ? 'Nova Sitara reviews your profile first. Your CV is only shared with the named partner after you give specific consent below.' : 'Submit your application details below. Our recruiting team will review your CV.'}
                   </p>
 
-                  {submitSuccess ? (
+                  {expired ? (
+                    <Link to="/careers"><Button variant="outline" style={{ width: '100%' }}>View Active Opportunities</Button></Link>
+                  ) : submitSuccess ? (
                     <div
                       style={{
                         padding: '2rem 1.5rem',
@@ -357,6 +384,7 @@ export const JobDetailsPage: React.FC = () => {
                             linkedInUrl: '',
                             coverLetter: '',
                             resumeFile: null,
+                            sharingConsent: false,
                           });
                         }}
                         style={{
@@ -588,6 +616,16 @@ export const JobDetailsPage: React.FC = () => {
                           }}
                         />
                       </div>
+
+                      {sourced && (
+                        <div style={{ padding: '0.9rem 1rem', borderRadius: 'var(--radius-md)', backgroundColor: '#fff', border: `1px solid ${errors.sharingConsent ? 'var(--color-error)' : 'var(--color-border)'}` }}>
+                          <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem', cursor: 'pointer', fontSize: '0.82rem', lineHeight: 1.5, color: 'var(--color-text-body)' }}>
+                            <input type="checkbox" checked={formData.sharingConsent} onChange={(e) => { setFormData({ ...formData, sharingConsent: e.target.checked }); setErrors((prev) => ({ ...prev, sharingConsent: '' })); }} style={{ marginTop: '0.18rem', accentColor: 'var(--color-primary)' }} />
+                            <span>I authorize Nova Sitara Private Limited to share my CV and application details with <strong>{job.source?.company || 'the named source partner'}</strong> only for this opportunity{job.source?.reference ? ` (${job.source.reference})` : ''}. I understand Nova Sitara is an independent sourcing partner and I will not be charged a placement fee.</span>
+                          </label>
+                          {errors.sharingConsent && <div style={{ color: 'var(--color-error)', fontSize: '0.775rem', marginTop: '0.4rem' }}>{errors.sharingConsent}</div>}
+                        </div>
+                      )}
 
                       <Button type="submit" variant="primary" size="lg" isLoading={isSubmitting} rightIcon={<Send size={16} />} style={{ width: '100%' }}>
                         Submit Application

@@ -1,3 +1,20 @@
+export type OpportunitySourceType = 'nova_sitara' | 'sourced';
+
+export interface OpportunitySource {
+  type: OpportunitySourceType;
+  company?: string;
+  reference?: string;
+  url?: string;
+  workModel?: string;
+  startDate?: string;
+  duration?: string;
+  workload?: string;
+  languages?: string;
+  sourcePublished?: string;
+  lastVerified?: string;
+  expiresAt?: string;
+}
+
 export interface JobItem {
   id: string;
   title: string;
@@ -11,7 +28,43 @@ export interface JobItem {
   requirements: string[];
   preferredSkills: string[];
   benefits: string[];
+  source?: OpportunitySource;
   de?: Partial<Pick<JobItem, 'title' | 'department' | 'overview' | 'responsibilities' | 'requirements' | 'preferredSkills' | 'benefits'>>;
+}
+
+const META_PATTERN = /^\[ns:([a-z_]+)\](.*)$/;
+
+const META_KEYS: Record<string, keyof OpportunitySource> = {
+  source_type: 'type', source_company: 'company', source_reference: 'reference', source_url: 'url',
+  work_model: 'workModel', start_date: 'startDate', duration: 'duration', workload: 'workload',
+  languages: 'languages', source_published: 'sourcePublished', last_verified: 'lastVerified', expires_at: 'expiresAt',
+};
+
+/** Extracts Nova Sitara's internal sourcing metadata from the existing benefits field. */
+export function parseJobMetadata(values: string[] = []): { benefits: string[]; source?: OpportunitySource } {
+  const benefits: string[] = [];
+  const metadata: Partial<OpportunitySource> = {};
+  values.forEach((value) => {
+    const match = value.match(META_PATTERN);
+    if (!match) { benefits.push(value); return; }
+    const key = META_KEYS[match[1]];
+    if (key) (metadata as Record<string, string>)[key] = match[2].trim();
+  });
+  if (!metadata.type) return { benefits };
+  return { benefits, source: metadata as OpportunitySource };
+}
+
+export function isJobExpired(job: JobItem): boolean {
+  const expires = job.source?.expiresAt;
+  if (!expires) return false;
+  const deadline = new Date(`${expires}T23:59:59`);
+  return !Number.isNaN(deadline.getTime()) && deadline.getTime() < Date.now();
+}
+
+export function formatOpportunityDate(value?: string): string {
+  if (!value) return '';
+  const date = new Date(`${value}T12:00:00`);
+  return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).format(date);
 }
 
 /** Returns the job in German where a German value was entered in admin, else English. */

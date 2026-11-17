@@ -1,4 +1,4 @@
-import type { JobItem } from '../data/jobs';
+import { parseJobMetadata, type JobItem } from '../data/jobs';
 
 export interface ApplicationFormData {
   fullName: string;
@@ -10,6 +10,7 @@ export interface ApplicationFormData {
   linkedInUrl?: string;
   coverLetter?: string;
   resumeFile: File | null;
+  sharingConsent: boolean;
 }
 
 export interface ContactFormData {
@@ -43,6 +44,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 const errorMessage = (e: unknown) => (e instanceof Error ? e.message : 'Something went wrong. Please try again.');
 
 function mapJob(row: any): JobItem {
+  const parsed = parseJobMetadata(row.benefits ?? []);
   return {
     id: row.id,
     title: row.title,
@@ -55,7 +57,8 @@ function mapJob(row: any): JobItem {
     responsibilities: row.responsibilities ?? [],
     requirements: row.requirements ?? [],
     preferredSkills: row.preferred_skills ?? [],
-    benefits: row.benefits ?? [],
+    benefits: parsed.benefits,
+    source: parsed.source,
     de: {
       title: row.title_de ?? undefined,
       department: row.department_de ?? undefined,
@@ -87,7 +90,7 @@ export const api = {
     }
   },
 
-  async submitApplication(jobId: string, formData: ApplicationFormData): Promise<ApiResponse> {
+  async submitApplication(job: JobItem, formData: ApplicationFormData): Promise<ApiResponse> {
     if (!formData.fullName || !formData.email || !formData.phone || !formData.resumeFile) {
       return { success: false, message: 'Please complete all required fields and upload your resume.' };
     }
@@ -100,10 +103,13 @@ export const api = {
     if (!formData.resumeFile.name.toLowerCase().endsWith('.pdf')) {
       return { success: false, message: 'Only PDF files are accepted.' };
     }
+    if (job.source?.type === 'sourced' && !formData.sharingConsent) {
+      return { success: false, message: 'Please provide consent before we can review you for this sourced opportunity.' };
+    }
 
     // The server validates and stores everything; these checks just give faster feedback.
     const body = new FormData();
-    body.append('job_id', jobId);
+    body.append('job_id', job.id);
     body.append('full_name', formData.fullName);
     body.append('email', formData.email);
     body.append('phone', formData.phone);
@@ -111,7 +117,10 @@ export const api = {
     body.append('years_of_experience', formData.yearsOfExperience);
     body.append('primary_skill', formData.primarySkill);
     body.append('linkedin_url', formData.linkedInUrl ?? '');
-    body.append('cover_letter', formData.coverLetter ?? '');
+    const consentRecord = job.source?.type === 'sourced'
+      ? `Candidate sharing consent: I authorize Nova Sitara Private Limited to share my CV and application details with ${job.source.company || 'the named source partner'} for ${job.title}${job.source.reference ? ` (${job.source.reference})` : ''} only. I understand Nova Sitara is an independent sourcing partner and I will not be charged a placement fee. Consent recorded at ${new Date().toISOString()}.`
+      : '';
+    body.append('cover_letter', [formData.coverLetter?.trim(), consentRecord].filter(Boolean).join('\n\n'));
     body.append('resume', formData.resumeFile);
 
     try {

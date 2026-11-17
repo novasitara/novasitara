@@ -42,7 +42,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job: rawJob }) => {
         <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: 'var(--color-text-heading)' }}>
           {job.title}
         </h3>
-        {isSourced && <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-primary)', marginBottom: '0.7rem' }}>Partner opportunity · Source: {job.source?.company || 'Recruitment partner'}</div>}
+        {isSourced && <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-primary)', marginBottom: '0.7rem' }}>Third-party opportunity · Original source: {job.source?.company || 'Recruitment agency'}</div>}
 
         <p
           style={{

@@ -104,7 +104,7 @@ export const api = {
       return { success: false, message: 'Only PDF files are accepted.' };
     }
     if (job.source?.type === 'sourced' && !formData.sharingConsent) {
-      return { success: false, message: 'Please provide consent before we can review you for this sourced opportunity.' };
+      return { success: false, message: 'Please provide consent before we can review you for this third-party opportunity.' };
     }
 
     // The server validates and stores everything; these checks just give faster feedback.
@@ -118,7 +118,7 @@ export const api = {
     body.append('primary_skill', formData.primarySkill);
     body.append('linkedin_url', formData.linkedInUrl ?? '');
     const consentRecord = job.source?.type === 'sourced'
-      ? `Candidate sharing consent: I authorize Nova Sitara Private Limited to share my CV and application details with ${job.source.company || 'the named source partner'} for ${job.title}${job.source.reference ? ` (${job.source.reference})` : ''} only. I understand Nova Sitara is an independent sourcing partner and I will not be charged a placement fee. Consent recorded at ${new Date().toISOString()}.`
+      ? `Candidate sharing consent: I authorize Nova Sitara Private Limited to share my CV and application details with ${job.source.company || 'the named source agency'} for ${job.title}${job.source.reference ? ` (${job.source.reference})` : ''} only. I understand Nova Sitara is an independent candidate-sourcing company, is not the original advertiser, and I will not be charged a placement fee. Consent recorded at ${new Date().toISOString()}.`
       : '';
     body.append('cover_letter', [formData.coverLetter?.trim(), consentRecord].filter(Boolean).join('\n\n'));
     body.append('resume', formData.resumeFile);

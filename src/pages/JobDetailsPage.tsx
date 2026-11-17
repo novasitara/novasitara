@@ -87,7 +87,7 @@ export const JobDetailsPage: React.FC = () => {
       newErrors.resumeFile = 'Please upload your Resume / CV (PDF)';
     }
     if (job?.source?.type === 'sourced' && !formData.sharingConsent) {
-      newErrors.sharingConsent = 'Your consent is required for this partner opportunity';
+      newErrors.sharingConsent = 'Your consent is required for this third-party opportunity';
     }
 
     setErrors(newErrors);
@@ -196,9 +196,9 @@ export const JobDetailsPage: React.FC = () => {
               </div>
               {sourced && (
                 <div style={{ marginTop: '1.5rem', padding: '1rem 1.15rem', borderRadius: 'var(--radius-lg)', backgroundColor: '#fff', border: '1px solid rgba(134, 78, 168, 0.28)' }}>
-                  <div style={{ fontWeight: 800, color: 'var(--color-text-heading)', marginBottom: '0.45rem' }}>Verified partner opportunity</div>
+                  <div style={{ fontWeight: 800, color: 'var(--color-text-heading)', marginBottom: '0.45rem' }}>Verified third-party opportunity</div>
                   <p style={{ fontSize: '0.86rem', lineHeight: 1.55, color: 'var(--color-text-body)', marginBottom: '0.65rem' }}>
-                    Nova Sitara independently summarized this opportunity from {job.source?.company || 'the named recruitment partner'}. We are not the original advertiser. We review candidate fit before any CV is shared, and candidates are never charged a placement fee.
+                    Nova Sitara independently summarized this opportunity from {job.source?.company || 'the named recruitment agency'}. We are not the original advertiser and have not implied a formal partnership. We review candidate fit before any CV is shared, and candidates are never charged a placement fee.
                   </p>
                   <div style={{ display: 'flex', gap: '0.65rem 1.35rem', flexWrap: 'wrap', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
                     {job.source?.reference && <span><strong>Reference:</strong> {job.source.reference}</span>}
@@ -350,7 +350,7 @@ export const JobDetailsPage: React.FC = () => {
                 >
                   <h3 style={{ fontSize: '1.35rem', marginBottom: '0.35rem' }}>{expired ? 'This Opportunity Has Closed' : 'Apply for this Role'}</h3>
                   <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1.75rem' }}>
-                    {expired ? 'The verification window for this listing has ended. Please return to Careers for active roles.' : sourced ? 'Nova Sitara reviews your profile first. Your CV is only shared with the named partner after you give specific consent below.' : 'Submit your application details below. Our recruiting team will review your CV.'}
+                    {expired ? 'The verification window for this listing has ended. Please return to Careers for active roles.' : sourced ? 'Nova Sitara reviews your profile first. Your CV is only shared with the named source agency after you give specific consent below.' : 'Submit your application details below. Our recruiting team will review your CV.'}
                   </p>
 
                   {expired ? (
@@ -621,7 +621,7 @@ export const JobDetailsPage: React.FC = () => {
                         <div style={{ padding: '0.9rem 1rem', borderRadius: 'var(--radius-md)', backgroundColor: '#fff', border: `1px solid ${errors.sharingConsent ? 'var(--color-error)' : 'var(--color-border)'}` }}>
                           <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem', cursor: 'pointer', fontSize: '0.82rem', lineHeight: 1.5, color: 'var(--color-text-body)' }}>
                             <input type="checkbox" checked={formData.sharingConsent} onChange={(e) => { setFormData({ ...formData, sharingConsent: e.target.checked }); setErrors((prev) => ({ ...prev, sharingConsent: '' })); }} style={{ marginTop: '0.18rem', accentColor: 'var(--color-primary)' }} />
-                            <span>I authorize Nova Sitara Private Limited to share my CV and application details with <strong>{job.source?.company || 'the named source partner'}</strong> only for this opportunity{job.source?.reference ? ` (${job.source.reference})` : ''}. I understand Nova Sitara is an independent sourcing partner and I will not be charged a placement fee.</span>
+                            <span>I authorize Nova Sitara Private Limited to share my CV and application details with <strong>{job.source?.company || 'the named source agency'}</strong> only for this opportunity{job.source?.reference ? ` (${job.source.reference})` : ''}. I understand Nova Sitara is an independent candidate-sourcing company, is not the original advertiser, and I will not be charged a placement fee.</span>
                           </label>
                           {errors.sharingConsent && <div style={{ color: 'var(--color-error)', fontSize: '0.775rem', marginTop: '0.4rem' }}>{errors.sharingConsent}</div>}
                         </div>

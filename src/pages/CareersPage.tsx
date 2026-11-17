@@ -60,10 +60,10 @@ export const CareersPage: React.FC = () => {
                 <span style={{ color: 'var(--color-primary)' }}>Build What Comes Next.</span>
               </h1>
               <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', lineHeight: 1.6, color: 'var(--color-text-body)' }}>
-                Explore selected Nova Sitara roles and verified partner opportunities for Vistex, SAP SD/OTC, EWM, DRC and related specializations.
+                Explore selected Nova Sitara roles and verified third-party opportunities for Vistex, SAP SD/OTC, EWM, DRC and related specializations.
               </p>
               <p style={{ marginTop: '1rem', fontSize: '0.82rem', lineHeight: 1.55, color: 'var(--color-text-muted)' }}>
-                Partner opportunities are independently summarized by Nova Sitara. The original source, reference and verification date are shown on every listing. Candidates are never charged a placement fee.
+                Third-party opportunities are independently summarized by Nova Sitara. The original source, reference and verification date are shown on every listing. Candidates are never charged a placement fee.
               </p>
             </div>
           </div>
@@ -112,7 +112,7 @@ export const CareersPage: React.FC = () => {
                 <select value={selectedSource} onChange={(e) => setSelectedSource(e.target.value)} className="careers-source-filter" style={{ padding: '0.65rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-light)', fontSize: '0.9rem', fontFamily: 'inherit', cursor: 'pointer', color: 'var(--color-text-heading)', width: '100%' }} aria-label="Filter by opportunity source">
                   <option value="all">All Opportunities</option>
                   <option value="nova_sitara">Nova Sitara Roles</option>
-                  <option value="sourced">Partner Opportunities</option>
+                  <option value="sourced">Third-Party Opportunities</option>
                 </select>
               </div>
             </div>
